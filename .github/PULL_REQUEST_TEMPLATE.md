@@ -1,5 +1,5 @@
 ## Issue
-Describe issue here.
+Describe the issue here.
 
 ## Summary
 Describe your changes here.
