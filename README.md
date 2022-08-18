@@ -1,6 +1,7 @@
 # NFT Minter Interface
 
-![Build](https://github.com/evm-nft-minter/interface/workflows/Build/badge.svg)
+[![Build](https://github.com/evm-nft-minter/interface/workflows/Build/badge.svg)](https://github.com/evm-nft-minter/interface/actions/workflows/build.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/cb07f15d-4434-4091-be4f-dd82d8b39592/deploy-status)](https://app.netlify.com/sites/evm-nft-minter/deploys)
 
 # Getting Started with Create React App
 
