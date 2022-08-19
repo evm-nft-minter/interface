@@ -5,11 +5,19 @@
   "license": "MIT",
   "homepage": ".",
   "bugs": {
-    "url" : "https://github.com/evm-nft-minter/interface/issues",
-    "email" : "nft-minter@tuta.io"
+    "url": "https://github.com/evm-nft-minter/interface/issues",
+    "email": "nft-minter@tuta.io"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "prepare": "husky install",
+    "lint": "eslint ./src"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
+    "@walletconnect/client": "^1.8.0",
+    "@walletconnect/qrcode-modal": "^1.8.0",
     "axios": "^0.27.2",
     "bn.js": "^5.2.1",
     "react": "^18.2.0",
@@ -27,42 +35,17 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-router-dom": "^5.3.3",
-    "@typescript-eslint/eslint-plugin": "^5.33.1",
-    "@typescript-eslint/parser": "^5.33.1",
-    "eslint": "^8.22.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.30.1",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
-    "react-scripts": "5.0.1",
+    "react-scripts": "4.0.3",
+    "sass": "^1.54.4",
     "typescript": "^4.4.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "prepare": "husky install",
-    "lint": "eslint ./src"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
