@@ -21,7 +21,7 @@ export class WalletConnect extends Provider {
     const chainId = await this.getChainId();
 
     this._provider.on(WalletConnectEventEnum.SESSION_UPDATE, (_, payload) => {
-      const { accounts, chainId: _chainId } = payload.params;
+      const { accounts, chainId: _chainId } = payload.params[0];
 
       this._emit(ProviderEventEnum.ACCOUNT_CHANGED, accounts[0].toLowerCase());
       this._emit(ProviderEventEnum.CHAIN_CHANGED, _chainId);

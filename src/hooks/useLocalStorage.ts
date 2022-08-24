@@ -19,24 +19,21 @@ export const useLocalStorage = <T>(
     }
   });
 
-  const setValue = useCallback(
-    (value: T | ((prev: T) => T)) => {
-      try {
-        setStored((prev) => {
-          const next = value instanceof Function ? value(prev) : value;
+  const setValue = useCallback((value: T | ((prev: T) => T)) => {
+    try {
+      setStored((prev) => {
+        const next = value instanceof Function ? value(prev) : value;
 
-          window.localStorage.setItem(key, JSON.stringify(next));
+        window.localStorage.setItem(key, JSON.stringify(next));
 
-          return next;
-        });
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(error);
-      }
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
+        return next;
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return [stored, setValue];
 };
