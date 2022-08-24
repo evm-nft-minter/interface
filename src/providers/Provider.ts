@@ -53,7 +53,7 @@ export abstract class Provider {
       });
 
       return true;
-    } catch (e) {
+    } catch (error) {
       return false;
     }
   }
@@ -67,8 +67,8 @@ export abstract class Provider {
       });
 
       return true;
-    } catch (e: any) {
-      if (e.code === 4902) {
+    } catch (error: any) {
+      if (error.code === 4902) {
         return this.addNetwork(networkType);
       }
 

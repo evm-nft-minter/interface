@@ -48,7 +48,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
     setProvider(_provider);
     setChainId(_chainId);
     setAccount(_account);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const disconnect = useCallback(() => {
@@ -60,7 +60,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
     provider?.removeAllListeners(ProviderEventEnum.ACCOUNT_CHANGED);
     provider?.removeAllListeners(ProviderEventEnum.CHAIN_CHANGED);
     provider?.disconnect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider]);
 
   const sendTx = useCallback((tx: TransactionConfig) => {
@@ -85,7 +85,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
         disconnect();
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -104,7 +104,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
     ) => {
       setChainId(_chainId);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider]);
 
   return (
