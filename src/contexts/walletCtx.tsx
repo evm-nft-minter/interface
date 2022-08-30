@@ -11,10 +11,12 @@ import { ProviderEnum, ProviderEventEnum } from 'providers/typedefs';
 import { Provider } from 'providers/Provider';
 import { makeProvider } from 'providers/makeProvider';
 import { useLocalStorage } from 'hooks/useLocalStorage';
+import { CHAIN_ID_TO_NETWORK } from 'networks/networks';
 
 interface WalletCtx {
   account: string | null
   chainId: number | null
+  network: NetworkEnum | null
   provider: ProviderEnum | null
   connect: (provider: ProviderEnum) => Promise<void>
   disconnect: () => void
@@ -113,6 +115,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
         account,
         chainId,
         provider: providerType,
+        network: chainId ? CHAIN_ID_TO_NETWORK[chainId] : null,
         disconnect,
         connect,
         sendTx,

@@ -1,0 +1,13 @@
+@mixin breakpoint($size, $dir) {
+  @if $dir == 'down' {
+    @media (max-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  }
+
+  @else if $dir == 'up' {
+    @media (min-width: map-get($breakpoints, $size)) {
+      @content;
+    }
+  }
+}

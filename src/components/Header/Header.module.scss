@@ -1,1 +1,63 @@
+@import "styles/utils";
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+
+  padding: 16px 24px;
+}
+
+.logo {
+  margin-right: auto;
+}
+
+.identIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  background: #191b1f;
+
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0px 0px 8px #ffffffae
+  }
+}
+
+.accountIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  background: #191b1f;
+
+  &:hover {
+    .accountIconWrapper {
+      border-color: #315f9bb3
+    }
+  }
+
+  .accountIconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 36px;
+    height: 36px;
+
+    border: 1px solid #153e6fb3;
+    border-radius: 50%;
+  }
+}
 
