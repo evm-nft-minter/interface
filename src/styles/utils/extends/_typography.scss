@@ -3,10 +3,21 @@
   font-weight: $font-weight_normal;
 }
 
+%t-plex-normal {
+  font-family: $font-plex-sans;
+  font-weight: $font-weight_normal;
+}
+
 %t-inter-16-normal {
   @extend %t-inter-normal;
   font-size: 16px;
   line-height: 19px;
+}
+
+%t-plex-20-normal {
+  @extend %t-plex-normal;
+  font-size: 20px;
+  line-height: 23px;
 }
 
 

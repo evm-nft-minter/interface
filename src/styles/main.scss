@@ -1,5 +1,5 @@
 @import "~@fontsource/inter/400.css";
-@import "~@fontsource/ibm-plex-mono/index.css";
+@import "~@fontsource/ibm-plex-mono/400.css";
 
 @import "reset";
 @import "utils";
@@ -11,7 +11,7 @@ html {
 body {
   margin: 0;
   background: #23262F;
-  color: white;
+  color: #ececec;
 }
 
 #background-radial-gradient {

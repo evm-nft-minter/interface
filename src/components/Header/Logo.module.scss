@@ -1,0 +1,29 @@
+@import "styles/utils";
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  height: 40px;
+  padding: 0 12px;
+
+  border-radius: 12px;
+  background: #191b1f;
+}
+
+.icon {
+  width: 45px;
+  height: 28px;
+}
+
+.name {
+  @extend %t-plex-20-normal;
+
+  word-spacing: -4px;
+
+  @include breakpoint(medium, down) {
+    display: none;
+  }
+}

@@ -5,14 +5,22 @@ import {
   useRef,
 } from 'react';
 import jazzicon from '@metamask/jazzicon';
-import { useWallet } from 'contexts/walletCtx';
+import style from 'components/ui-kit/IdentIcon/IdentIcon.module.scss';
 
-export const IdentIcon = memo(() => {
-  const { account } = useWallet();
+interface Props {
+  diameter: number
+  address: string
+}
+
+export const IdentIcon = memo((props: Props) => {
+  const {
+    diameter,
+    address,
+  } = props;
 
   const icon = useMemo(() => (
-    account && jazzicon(16, parseInt(account.slice(2, 10), 16))
-  ), [account]);
+    address && jazzicon(diameter, parseInt(address.slice(2, 10), 16))
+  ), [address, diameter]);
 
   const iconRef = useRef<HTMLDivElement>(null);
 
@@ -31,6 +39,13 @@ export const IdentIcon = memo(() => {
   }, [icon]);
 
   return (
-    <span ref={iconRef} />
+    <div
+      style={{
+        width: diameter,
+        height: diameter,
+      }}
+      className={style.icon}
+      ref={iconRef}
+    />
   );
 });
