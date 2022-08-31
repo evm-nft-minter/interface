@@ -1,0 +1,81 @@
+@import 'styles/utils';
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 50%;
+  background: #191b1f;
+
+  .accountIcon {
+    border: 1px solid #153e6fb3;
+    border-radius: 50%;
+  }
+
+  &:hover {
+    .accountIcon {
+      border-color: #315f9bb3
+    }
+  }
+
+  &.connected {
+    &:hover {
+      box-shadow: 0px 0px 8px #ffffffae
+    }
+  }
+}
+
+.list {
+  position: absolute;
+
+  width: max-content;
+
+  top: 52px;
+  right: 0;
+
+  border-radius: 12px;
+  background: #191b1f;
+
+  box-shadow:
+    #00000003 0px 0px 1px,
+    #0000000a 0px 4px 8px,
+    #0000000a 0px 16px 24px,
+    #00000003 0px 24px 32px;
+}
+
+.nav {
+  @extend %t-inter-16-normal;
+
+  display: flex;
+
+  padding: 8px;
+
+  .link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    transition: color 0.2s;
+
+    &:hover {
+      color: #8e8e8e
+    }
+
+    &:global(.active) {
+      background: #212429;
+    }
+  }
+}
