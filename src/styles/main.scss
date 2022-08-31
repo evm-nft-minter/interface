@@ -5,13 +5,15 @@
 @import "utils";
 
 html {
+  @extend %t-inter-16-normal;
+
   scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   background: #23262F;
-  color: #ececec;
+  color: #d4d4d4;
 }
 
 #background-radial-gradient {
