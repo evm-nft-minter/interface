@@ -19,6 +19,7 @@ export const Modal = memo((props: Props) => {
     <ReactModal
       isOpen={isOpen}
       onRequestClose={onClose}
+      portalClassName={style.portal}
     >
       <div className={style.modal}>
         {props.children}

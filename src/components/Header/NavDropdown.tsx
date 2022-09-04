@@ -12,7 +12,7 @@ import { useToggleVisibility } from 'hooks/useToggleVisibility';
 import style from 'components/Header/NavDropdown.module.scss';
 
 const NAV_ITEMS = [{
-  to: ROUTES.create,
+  to: ROUTES.create.index,
   title: 'Create',
   Icon: CreateIcon,
 }, {
@@ -61,7 +61,7 @@ export const NavDropdown = () => {
         <nav className={style.nav}>
           <ul>
             {NAV_ITEMS.map(({ to, title, Icon }) => (
-              <li>
+              <li key={to}>
                 <NavLink
                   className={style.link}
                   to={to}

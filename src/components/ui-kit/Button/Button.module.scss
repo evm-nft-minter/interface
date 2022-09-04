@@ -1,0 +1,29 @@
+@import "styles/utils";
+
+.button {
+  @extend %t-inter-18-normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 44px;
+  padding: 0 24px;
+
+  border-radius: 12px;
+
+  transition: 0.2s;
+}
+
+.primary {
+  background: #0556C9;
+
+  &:hover {
+    background: #1966d4
+  }
+
+  &:active {
+    box-shadow: #165bbd 0px 0px 0px 1pt;
+    background-color: #165bbd;
+  }
+}
