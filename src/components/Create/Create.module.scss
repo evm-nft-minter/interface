@@ -1,0 +1,64 @@
+@import "styles/utils";
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  @extend %card;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 800px;
+}
+
+.cardArea {
+  align-self: flex-start;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: calc(50% - 1px);
+  height: 100%;
+  padding: 32px 32px 40px;
+}
+
+.title {
+  @extend %t-plex-24-normal;
+
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+
+  margin-bottom: 40px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.text {
+  @extend %t-inter-16-normal;
+}
+
+.line {
+  width: 1px;
+  height: 90%;
+
+  border: 1px solid #2c2f36;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  width: 200px;
+  height: 100%;
+  margin-top: 44px;
+}
