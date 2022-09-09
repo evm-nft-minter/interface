@@ -1,7 +1,7 @@
 @import "styles/utils";
 
 $input-height: 252px;
-$input-height-mobil: 252px;
+$input-height-mobil: $input-height;
 
 $text-below-height: 20px;
 $text-below-height-mobil: 16px;
@@ -10,8 +10,12 @@ $height: $input-height + $text-below-height;
 $height-mobil: $input-height-mobil + $text-below-height-mobil;
 
 .wrapper {
-  width: 352px;
+  width: fit-content;
   height: $height;
+
+  @include breakpoint(medium, down) {
+    height: $height-mobil;
+  }
 }
 
 .label {
@@ -36,6 +40,7 @@ $height-mobil: $input-height-mobil + $text-below-height-mobil;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 2;
 
     display: flex;
     justify-content: center;
@@ -48,8 +53,6 @@ $height-mobil: $input-height-mobil + $text-below-height-mobil;
     color: #8a939b;
 
     transition: 0.25s;
-
-    z-index: 2;
 
     &.hidden {
       opacity: 0;

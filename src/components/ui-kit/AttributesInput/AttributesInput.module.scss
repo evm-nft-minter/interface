@@ -12,9 +12,7 @@
 }
 
 $attribute-color: lighten(#2172e5, 10);
-// $attribute-color: #15b2e5;
 $attribute-background: transparentize($attribute-color, 0.95);
-$attribute-height: 68px;
 
 .attribute {
   height: 68px;

@@ -8,7 +8,7 @@ interface Props extends Attribute {
   onRemove: (id: Attribute['id']) => void
 }
 
-export const AttributeInputGroupe = (props: Props) => {
+export const AttributeInputGroup = (props: Props) => {
   const {
     id,
     control,

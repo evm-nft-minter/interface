@@ -19,9 +19,6 @@
   }
 }
 
-// #2172e5
-// #1966d4
-
 .primary {
   background: #2172e5;
 
@@ -32,20 +29,5 @@
   &:active {
     box-shadow: #165bbd 0px 0px 0px 1pt;
     background: #165bbd;
-  }
-}
-
-.secondary {
-  background: #222e47;
-
-  color: #7facff;
-
-  &:hover {
-    background: #2e3f63;
-  }
-
-  &:active {
-    box-shadow: #384e7c 0px 0px 0px 1pt;
-    background: #384e7c;
   }
 }

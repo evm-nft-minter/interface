@@ -9,13 +9,13 @@ import { Label } from 'components/ui-kit/Label/Label';
 import { ImageInput } from 'components/ui-kit/ImageInput/ImageInput';
 import { AttributesInput } from 'components/ui-kit/AttributesInput/AttributesInput';
 import { TokenMetadata } from 'typedefs/common';
-import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 import {
   setFileToLS,
   getFileFromLS,
   getItemFromLS,
   setItemToLS,
 } from 'tools/localStorage';
+import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 
 type FieldValues = Nullable<TokenMetadata>;
 

@@ -12,7 +12,6 @@ const removeItem = (key: string) => {
   window.localStorage.removeItem(key);
 };
 
-// eslint-disable-next-line consistent-return
 export const getItemFromLS = <T>(path: string): T | null => {
   const [root, ...keys] = path.split('.');
 
@@ -28,8 +27,6 @@ export const getItemFromLS = <T>(path: string): T | null => {
     const key = keys[i];
 
     if (!currentLevel[key]) {
-      currentLevel = null;
-
       return null;
     }
 
@@ -54,22 +51,6 @@ export const setItemToLS = (path: string, item: any) => {
 
   const data = getItem(root) || {};
   let currentLevel = data;
-
-  keys.forEach((key, i) => {
-    if (i === keys.length - 1) {
-      currentLevel[key] = item;
-
-      return;
-    }
-
-    if (!currentLevel[key]) {
-      currentLevel[key] = {};
-    }
-
-    currentLevel = currentLevel[key];
-  });
-
-  setItem(root, data);
 
   for (let i = 0; i < keys.length; i += 1) {
     const key = keys[i];
@@ -132,12 +113,12 @@ export const setFileToLS = async (path: string, file: File | null) => {
   }
 
   const arrayBuffer = await file.arrayBuffer();
-  const bites = Array.from(new Uint8Array(arrayBuffer));
+  const bytes = Array.from(new Uint8Array(arrayBuffer));
 
   setItemToLS(path, {
     name: file.name,
     type: file.type,
-    bites,
+    bytes,
   });
 };
 
@@ -148,7 +129,7 @@ export const getFileFromLS = (path: string): File | null => {
     return null;
   }
 
-  const uint8Array = new Uint8Array(data.bites);
+  const uint8Array = new Uint8Array(data.bytes);
 
   return new File([uint8Array], data.name, {
     type: data.type,

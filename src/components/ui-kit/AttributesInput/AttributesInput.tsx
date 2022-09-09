@@ -66,14 +66,3 @@ export const AttributesInput = <T extends FieldValues>(props: Props<T>) => {
     </div>
   );
 };
-
-  // <label htmlFor="add-attr-btn" className={style.input}>
-  //   label click
-  //   <button type="button">
-  //     click
-  //   </button>
-  // </label>
-
-  // <button id="add-attr-btn" type="button" onClick={console.log}>
-  //   click
-  // </button>
