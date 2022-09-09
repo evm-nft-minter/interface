@@ -39,9 +39,7 @@ export const NavDropdown = () => {
   return (
     <div ref={targetElement} className={style.dropdown}>
       <button
-        className={cn(style.dropdownBtn, {
-          [style.connected]: account,
-        })}
+        className={cn(style.dropdownBtn, { [style.connected]: account })}
         onClick={toggleVisibility}
       >
         {account ? (

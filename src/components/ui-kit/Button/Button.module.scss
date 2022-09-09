@@ -12,18 +12,22 @@
 
   border-radius: 12px;
 
-  transition: 0.2s;
+  transition: 0.25s;
+
+  @include breakpoint(medium, down) {
+    height: 40px;
+  }
 }
 
 .primary {
-  background: #0556C9;
+  background: #2172e5;
 
   &:hover {
-    background: #1966d4
+    background: #1966d4;
   }
 
   &:active {
     box-shadow: #165bbd 0px 0px 0px 1pt;
-    background-color: #165bbd;
+    background: #165bbd;
   }
 }

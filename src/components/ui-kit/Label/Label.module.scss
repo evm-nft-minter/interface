@@ -1,0 +1,16 @@
+@import "styles/utils";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  @extend %t-inter-16-normal;
+
+}
+
+.optional {
+  color: #b2b2b2;
+}

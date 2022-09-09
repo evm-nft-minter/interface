@@ -35,11 +35,10 @@
 
 .list {
   position: absolute;
-
-  width: max-content;
-
   top: 52px;
   right: 0;
+
+  width: max-content;
 
   border-radius: 12px;
   background: #191b1f;
@@ -49,8 +48,6 @@
     #0000000a 0px 4px 8px,
     #0000000a 0px 16px 24px,
     #00000003 0px 24px 32px;
-
-  z-index: 2;
 }
 
 .nav {
@@ -70,7 +67,7 @@
 
     border-radius: 8px;
 
-    transition: color 0.2s;
+    transition: color 0.25s;
 
     &:hover {
       color: #8e8e8e
