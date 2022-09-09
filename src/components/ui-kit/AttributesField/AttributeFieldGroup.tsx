@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Control } from 'react-hook-form';
-import { Input } from 'components/ui-kit/Filed/Filed';
+import { Field } from 'components/ui-kit/Filed/Filed';
 import { Attribute } from 'typedefs/common';
 
 interface Props extends Attribute {
@@ -25,12 +25,12 @@ export const AttributeFieldGroup = (props: Props) => {
         remove
       </button>
 
-      <Input
+      <Field
         name={`${id}.value`}
         control={control}
       />
 
-      <Input
+      <Field
         name={`${id}.traitType`}
         control={control}
       />

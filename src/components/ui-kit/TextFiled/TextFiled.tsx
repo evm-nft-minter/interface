@@ -6,7 +6,7 @@ import {
   useController,
 } from 'react-hook-form';
 import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
-import style from 'components/ui-kit/TextareaFiled/TextareaFiled.module.scss';
+import style from 'components/ui-kit/TextFiled/TextFiled.module.scss';
 
 interface Props<T extends FieldValues> {
   name: FieldPath<T>
@@ -16,7 +16,7 @@ interface Props<T extends FieldValues> {
   id?: string
 }
 
-export const Textarea = <T extends FieldValues>(props: Props<T>) => {
+export const TextFiled = <T extends FieldValues>(props: Props<T>) => {
   const {
     name,
     control,

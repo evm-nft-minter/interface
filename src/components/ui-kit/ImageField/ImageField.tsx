@@ -29,7 +29,7 @@ interface Props<T extends FieldValues> {
   id?: string
 }
 
-export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
+export const ImageFiled = <T extends FieldValues>(props: Props<T>) => {
   const {
     name,
     control,
@@ -89,9 +89,7 @@ export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
     onChange(null);
   }, [onChange]);
 
-  const error = fieldState.error?.message || (
-    invalidFileType ? 'Invalid file type' : undefined
-  );
+  const error = invalidFileType ? 'Invalid file type' : fieldState.error?.message;
 
   return (
     <FiledWrapper

@@ -16,7 +16,7 @@ interface Props<T extends FieldValues> {
   id?: string
 }
 
-export const Input = <T extends FieldValues>(props: Props<T>) => {
+export const Field = <T extends FieldValues>(props: Props<T>) => {
   const {
     name,
     control,
@@ -42,12 +42,12 @@ export const Input = <T extends FieldValues>(props: Props<T>) => {
     >
       <input
         {...field}
-        value={field.value || ''}
         className={cn(style.field, { [style.error]: error })}
-        placeholder={placeholder}
-        autoComplete="off"
+        value={field.value || ''}
         disabled={disabled}
+        placeholder={placeholder}
         id={id}
+        autoComplete="off"
       />
     </FiledWrapper>
   );
