@@ -1,0 +1,64 @@
+@import "styles/utils";
+
+.attributes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+
+  padding: 8px;
+
+  outline: 2px solid #2c2f36;
+  border-radius: 12px;
+}
+
+$attribute-color: lighten(#2172e5, 10);
+// $attribute-color: #15b2e5;
+$attribute-background: transparentize($attribute-color, 0.95);
+$attribute-height: 68px;
+
+.attribute {
+  height: 68px;
+  width: 140px;
+  padding: 12px;
+
+  border: 1px solid $attribute-color;
+  border-radius: 8px;
+  background: $attribute-background;
+
+  color: $attribute-color;
+
+  text-align: center;
+
+  .name {
+    @extend %t-plex-12-normal;
+
+    text-transform: uppercase;
+  }
+
+  .value {
+    @extend %t-inter-15-normal;
+    color: #ebebeb
+  }
+
+  .name,
+  .value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.addBtn {
+  @extend .attribute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    border-color: darken($attribute-color, 10);
+    background: darken($attribute-background, 10);
+
+    color: darken($attribute-color, 10);
+  }
+}

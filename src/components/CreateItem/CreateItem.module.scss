@@ -8,5 +8,25 @@
 .card {
   @extend %card;
 
-  width: 800px;
+  padding: 28px 38px;
+}
+
+.title {
+  @extend %t-plex-20-normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  padding-bottom: 28px;
+  margin-bottom: 20px;
+
+  border-bottom: 1px solid #2c2f36;
+}
+
+.formWrapper {
+  width: 600px;
+
+  margin: 0 auto;
 }
