@@ -1,17 +1,19 @@
 @import "styles/utils";
 
-.attributes {
+.wrapper {}
+
+.field {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 
   padding: 8px;
 
-  outline: 2px solid #2c2f36;
+  outline: 2px solid $c-line;
   border-radius: 12px;
 }
 
-$attribute-color: lighten(#2172e5, 10);
+$attribute-color: lighten($c-blue-prime, 10);
 $attribute-background: transparentize($attribute-color, 0.95);
 
 .attribute {
@@ -35,7 +37,8 @@ $attribute-background: transparentize($attribute-color, 0.95);
 
   .value {
     @extend %t-inter-15-normal;
-    color: #ebebeb
+
+    color: $c-text-primary;
   }
 
   .name,

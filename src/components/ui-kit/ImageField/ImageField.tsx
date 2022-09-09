@@ -16,7 +16,8 @@ import {
 import * as yup from 'yup';
 import { ImageIcon } from 'components/ui-kit/icons/ImageIcon';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
-import style from 'components/ui-kit/ImageInput/ImageInput.module.scss';
+import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
+import style from 'components/ui-kit/ImageField/ImageField.module.scss';
 
 const schema = yup
   .mixed()
@@ -42,9 +43,7 @@ export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
       ref,
       ...filed
     },
-    fieldState: {
-      error,
-    },
+    fieldState,
   } = useController<T>({
     name,
     control,
@@ -90,8 +89,15 @@ export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
     onChange(null);
   }, [onChange]);
 
+  const error = fieldState.error?.message || (
+    invalidFileType ? 'Invalid file type' : undefined
+  );
+
   return (
-    <div className={style.wrapper}>
+    <FiledWrapper
+      className={style.wrapper}
+      error={error}
+    >
       <label
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
@@ -102,7 +108,7 @@ export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
       >
         <input
           {...filed}
-          className={style.input}
+          className={style.filed}
           onChange={handleChange}
           value=""
           type="file"
@@ -131,18 +137,6 @@ export const ImageInput = <T extends FieldValues>(props: Props<T>) => {
           <ImageIcon className={style.imgIcon} />
         </div>
       </label>
-
-      {invalidFileType && !error && (
-        <p className={cn(style.textBelow, style.error)}>
-          Invalid file type
-        </p>
-      )}
-
-      {error && (
-        <p className={cn(style.textBelow, style.error)}>
-          {error.message}
-        </p>
-      )}
-    </div>
+    </FiledWrapper>
   );
 };

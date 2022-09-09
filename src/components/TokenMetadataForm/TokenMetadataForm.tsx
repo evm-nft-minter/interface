@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Input } from 'components/ui-kit/Input/Input';
+import { Input } from 'components/ui-kit/Filed/Filed';
 import { Button } from 'components/ui-kit/Button/Button';
-import { Textarea } from 'components/ui-kit/Textarea/Textarea';
+import { Textarea } from 'components/ui-kit/TextareaFiled/TextareaFiled';
 import { Label } from 'components/ui-kit/Label/Label';
-import { ImageInput } from 'components/ui-kit/ImageInput/ImageInput';
-import { AttributesInput } from 'components/ui-kit/AttributesInput/AttributesInput';
+import { ImageInput } from 'components/ui-kit/ImageField/ImageField';
+import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
 import { TokenMetadata } from 'typedefs/common';
 import {
   setFileToLS,
@@ -143,7 +143,7 @@ export const TokenMetadataForm = (props: Props) => {
       </Label>
 
       <Label title="Item Attributes">
-        <AttributesInput
+        <AttributesField
           name="attributes"
           control={control}
         />

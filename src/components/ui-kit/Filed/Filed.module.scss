@@ -1,0 +1,26 @@
+@import "styles/utils";
+
+$field-height: 44px;
+$field-height-mobil: 40px;
+
+$text-below-height: 20px;
+$text-below-height-mobil: 16px;
+
+$height: $field-height + $text-below-height;
+$height-mobil: $field-height-mobil + $text-below-height-mobil;
+
+.wrapper {
+  height: $height;
+
+  @include breakpoint(medium, down) {
+    height: $height-mobil;
+  }
+}
+
+.field {
+  @include field(
+    $min-height: $field-height,
+    $min-height-mobil: $field-height-mobil,
+    $padding: 0 16px,
+  );
+}

@@ -1,0 +1,34 @@
+@import "styles/utils";
+
+$text-below-height: 20px;
+$text-below-height-mobil: 16px;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textBelow {
+  @extend %t-inter-16-normal;
+
+  display: flex;
+  align-items: flex-end;
+
+  height: $text-below-height;
+
+  color: $c-text-secondary;
+  line-height: 14px;
+  white-space: nowrap;
+
+  @include breakpoint(medium, down) {
+    height: $text-below-height-mobil;
+
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  &.error {
+    color: $c-error;
+  }
+}

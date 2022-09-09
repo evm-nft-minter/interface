@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { Control } from 'react-hook-form';
-import { Input } from 'components/ui-kit/Input/Input';
+import { Input } from 'components/ui-kit/Filed/Filed';
 import { Attribute } from 'typedefs/common';
 
 interface Props extends Attribute {
@@ -8,7 +8,7 @@ interface Props extends Attribute {
   onRemove: (id: Attribute['id']) => void
 }
 
-export const AttributeInputGroup = (props: Props) => {
+export const AttributeFieldGroup = (props: Props) => {
   const {
     id,
     control,

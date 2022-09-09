@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { AttributeInputGroup } from 'components/ui-kit/AttributesInput/AttributeInputGroup';
+import { AttributeFieldGroup } from 'components/ui-kit/AttributesField/AttributeFieldGroup';
 import { Modal } from 'components/ui-kit/Modal/Modal';
 import { useForm } from 'react-hook-form';
 import { Button } from 'components/ui-kit/Button/Button';
@@ -88,7 +88,7 @@ export const AddAttributesModal = (props: Props) => {
     >
       {Object.entries(values).map(([name, value]) => (
         <div key={name}>
-          <AttributeInputGroup
+          <AttributeFieldGroup
             {...value}
             control={control}
             onRemove={removeAttr}
