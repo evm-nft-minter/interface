@@ -1,10 +1,10 @@
 import { WalletProvider } from 'contexts/walletCtx';
-import { RoutesResolver } from 'routes/RoutesResolver';
+import { Router } from 'routes/Router';
 
 export const App = () => {
   return (
     <WalletProvider>
-      <RoutesResolver />
+      <Router />
     </WalletProvider>
   );
 };

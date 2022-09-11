@@ -35,13 +35,15 @@ export const AttributeFieldGroup = (props: Props) => {
         placeholder="Power"
       />
 
-      <button
-        className={style.removeBtn}
-        onClick={handleRemove}
-        type="button"
-      >
-        <CloseIcon className={style.closeIcon} />
-      </button>
+      <div className={style.btnWrapper}>
+        <button
+          className={style.removeBtn}
+          onClick={handleRemove}
+          type="button"
+        >
+          <CloseIcon className={style.closeIcon} />
+        </button>
+      </div>
     </div>
   );
 };

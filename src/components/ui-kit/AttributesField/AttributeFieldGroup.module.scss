@@ -2,12 +2,20 @@
 
 .filedGroup {
   display: grid;
-
-  grid-template-columns: 1fr 1fr auto;
-
+  grid-template-columns: minmax(100px, 1fr) minmax(100px, 1fr) auto;
   align-items: start;
-
   column-gap: 8px;
+}
+
+.btnWrapper {
+  display: flex;
+  align-items: center;
+
+  height: 44px;
+
+  @include breakpoint(medium, down) {
+    height: 40px;
+  }
 }
 
 .removeBtn {
@@ -17,7 +25,6 @@
 
   width: 32px;
   height: 32px;
-  margin-top: 4px;
 
   border-radius: 10px;
   background: $c-background-field;

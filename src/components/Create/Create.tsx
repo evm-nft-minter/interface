@@ -57,7 +57,7 @@ export const Create = () => {
             and transfer to other accounts.
           </p>
 
-          <div className={style.buttonWrapper}>
+          <div className={style.btnWrapper}>
             <Button
               className={style.button}
               onClick={() => navigation(ROUTES.create.collection)}
