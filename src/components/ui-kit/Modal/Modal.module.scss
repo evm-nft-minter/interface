@@ -5,6 +5,42 @@
   z-index: 100;
 }
 
-.modal {
-  background: $c-background-primary;
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0000006c;
 }
+
+.modal {
+  @extend %card;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  max-height: 100vh;
+}
+
+.closeBtn {
+  position: absolute;
+  right: 16px;
+  top: 13px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px;
+
+  .closeIcon {
+    width: 14px;
+    height: 14px;
+  }
+}
+

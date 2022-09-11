@@ -1,0 +1,31 @@
+@import "styles/utils";
+
+.filedGroup {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr auto;
+
+  align-items: start;
+
+  column-gap: 8px;
+}
+
+.removeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+  margin-top: 4px;
+
+  border-radius: 10px;
+  background: $c-background-field;
+
+  .closeIcon {
+    width: 12px;
+    height: 12px;
+
+    color: $c-border-field
+  }
+}

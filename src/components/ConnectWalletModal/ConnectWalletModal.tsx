@@ -2,6 +2,7 @@ import { Modal } from 'components/ui-kit/Modal/Modal';
 import { useWallet } from 'contexts/walletCtx';
 import { useCallback } from 'react';
 import { ProviderEnum } from 'providers/typedefs';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import style from 'components/ConnectWalletModal/ConnectWalletModal.module.scss';
 
 interface Props {
@@ -35,15 +36,21 @@ export const ConnectWalletModal = (props: Props) => {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div className={style.modal}>
-        <h1>
-          Connect Wallet Modal
-        </h1>
+      {({ ModalHeader, ModalContent }) => (
+        <>
+          <ModalHeader>
+            <h1>
+              Connect Wallet Modal
+            </h1>
+          </ModalHeader>
 
-        <button onClick={handleConnect}>
-          Connect
-        </button>
-      </div>
+          <ModalContent>
+            <button onClick={handleConnect}>
+              Connect
+            </button>
+          </ModalContent>
+        </>
+      )}
     </Modal>
   );
 };

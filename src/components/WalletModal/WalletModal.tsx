@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Modal } from 'components/ui-kit/Modal/Modal';
 import { useWallet } from 'contexts/walletCtx';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import style from 'components/WalletModal/WalletModal.module.scss';
 
 interface Props {
@@ -28,15 +29,21 @@ export const WalletModal = (props: Props) => {
       isOpen={isOpen}
       onClose={onClose}
     >
-      <div className={style.container}>
-        <h1>
-          Wallet Modal
-        </h1>
+      {({ ModalHeader, ModalContent }) => (
+        <>
+          <ModalHeader>
+            <h1>
+              Wallet Modal
+            </h1>
+          </ModalHeader>
 
-        <button onClick={handleDisconnect}>
-          Disconnect
-        </button>
-      </div>
+          <ModalContent>
+            <button onClick={handleDisconnect}>
+              Disconnect
+            </button>
+          </ModalContent>
+        </>
+      )}
     </Modal>
   );
 };

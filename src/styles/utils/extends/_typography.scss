@@ -8,6 +8,11 @@
   font-weight: $font-weight_normal;
 }
 
+%t-inter-13-normal {
+  @extend %t-inter-normal;
+  font-size: 13px;
+}
+
 %t-inter-15-normal {
   @extend %t-inter-normal;
   font-size: 15px;

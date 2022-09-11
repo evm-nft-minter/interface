@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Button } from 'components/ui-kit/Button/Button';
 import { generateAttribute } from 'tools/common';
 import { Attribute } from 'typedefs/common';
+import style from 'components/ui-kit/AttributesField/AddAttributesModal.module.scss';
 
 interface Props {
   isOpen: boolean
@@ -43,7 +44,24 @@ export const AddAttributesModal = (props: Props) => {
 
   const removeAttr = useCallback((id: string) => {
     unregister(id);
-  }, [unregister]);
+
+    const _attributes = Object.values(getValues());
+
+    if (_attributes.length === 0) {
+      addAttr();
+    }
+  }, [unregister, getValues, addAttr]);
+
+  const initializeFields = useCallback(() => {
+    if (attributes.length === 0) {
+      addAttr();
+    } else {
+      attributes.forEach((attr) => {
+        register(attr.id);
+        setValue(attr.id, attr);
+      });
+    }
+  }, [attributes, addAttr, register, setValue]);
 
   const unregisterEmptyFields = useCallback(() => {
     const _attributes = Object.values(getValues());
@@ -55,58 +73,80 @@ export const AddAttributesModal = (props: Props) => {
     });
   }, [getValues, unregister]);
 
+  const unregisterAllFields = useCallback(() => {
+    const _attributes = Object.values(getValues());
+
+    _attributes.forEach((attr) => {
+      unregister(attr.id);
+    });
+  }, [getValues, unregister]);
+
   const handleSave = useCallback(() => {
     unregisterEmptyFields();
     onSave(Object.values(getValues()));
+    unregisterAllFields();
     onClose();
-  }, [getValues, onClose, onSave, unregisterEmptyFields]);
+  }, [getValues, onClose, onSave, unregisterAllFields, unregisterEmptyFields]);
 
   const handleClose = useCallback(() => {
-    unregisterEmptyFields();
+    unregisterAllFields();
     onClose();
-  }, [onClose, unregisterEmptyFields]);
+  }, [onClose, unregisterAllFields]);
 
   useEffect(() => {
     if (isOpen) {
-      return;
+      initializeFields();
     }
-
-    if (attributes.length === 0) {
-      addAttr();
-    } else {
-      attributes.forEach((attr) => {
-        register(attr.id);
-        setValue(attr.id, attr);
-      });
-    }
-  }, [addAttr, attributes, isOpen, register, setValue]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
     >
-      {Object.entries(values).map(([name, value]) => (
-        <div key={name}>
-          <AttributeFieldGroup
-            {...value}
-            control={control}
-            onRemove={removeAttr}
-          />
-        </div>
-      ))}
+      {({ ModalHeader, ModalContent, ModalFooter }) => (
+        <>
+          <ModalHeader className={style.header}>
+            <h2>Attributes</h2>
+          </ModalHeader>
 
-      <Button
-        onClick={addAttr}
-      >
-        Add
-      </Button>
+          <ModalContent className={style.content}>
+            <div className={style.fieldsName}>
+              <p className={style.name}>Name</p>
+              <p className={style.name}>Vale</p>
+            </div>
 
-      <Button
-        onClick={handleSave}
-      >
-        Save
-      </Button>
+            <div className={style.fieldsWrapper}>
+              {Object.entries(values).map(([name, value]) => (
+                <AttributeFieldGroup
+                  key={name}
+                  {...value}
+                  control={control}
+                  onRemove={removeAttr}
+                />
+              ))}
+            </div>
+
+            <Button
+              className={style.addBtn}
+              onClick={addAttr}
+              mode={Button.mode.SECONDARY}
+            >
+              Add More
+            </Button>
+          </ModalContent>
+
+          <ModalFooter className={style.footer}>
+            <Button
+              className={style.saveBtn}
+              onClick={handleSave}
+            >
+              Save
+            </Button>
+          </ModalFooter>
+        </>
+      )}
     </Modal>
   );
 };
