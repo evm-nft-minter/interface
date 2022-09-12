@@ -1,14 +1,14 @@
 @import 'styles/utils';
 
 .button {
-  border: 2px solid #191b1f;
-  border-radius: 12px;
+  padding: 2px;
 
-  background: #191b1f;
+  border-radius: 12px;
+  background: $c-background-primary;
 
   &:hover {
     .title {
-      border-color: #353841;;
+      border-color: #353841;
     }
   }
 }
@@ -22,10 +22,10 @@
   height: 36px;
   padding: 0 14px;
 
-  border: 1px solid #212429;
+  border: 1px solid $c-gray;
   border-radius: 10px;
 
-  background: #212429;
+  background: $c-gray;
 }
 
 .icon {

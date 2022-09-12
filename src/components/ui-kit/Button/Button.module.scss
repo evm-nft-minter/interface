@@ -1,6 +1,6 @@
 @import "styles/utils";
 
-.button {
+%button {
   @extend %t-inter-18-normal;
 
   display: flex;
@@ -20,7 +20,9 @@
 }
 
 .primary {
-  background: #2172e5;
+  @extend %button;
+
+  background: $c-blue-prime;
 
   &:hover {
     background: #1966d4;
@@ -30,4 +32,35 @@
     box-shadow: #165bbd 0px 0px 0px 1pt;
     background: #165bbd;
   }
+}
+
+.secondary {
+  @extend %button;
+
+  background: $c-line;
+
+  &:hover {
+    background: lighten($c-line, 20);
+  }
+
+  &:active {
+    background: lighten($c-line, 10);
+  }
+}
+
+.border {
+  @extend %t-inter-13-normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 28px;
+
+  border: 1px solid #376bad70;
+  border-radius: 12px;
+
+  padding: 4px 6px;
+
+  color: $c-blue-prime;
 }

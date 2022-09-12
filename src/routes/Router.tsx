@@ -1,15 +1,13 @@
-import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from 'routes/routes';
 import Root from 'pages/Root';
+import Home from 'pages/Home';
+import Create from 'pages/Create';
+import CreateItem from 'pages/CreateItem';
+import Collected from 'pages/Collected';
+import CommunityNft from 'pages/CommunityNft';
 
-const Home = lazy(() => import(/* webpackPrefetch: true */ 'pages/Home'));
-const Create = lazy(() => import(/* webpackPrefetch: true */ 'pages/Create'));
-const CreateItem = lazy(() => import(/* webpackPrefetch: true */ 'pages/CreateItem'));
-const Collected = lazy(() => import(/* webpackPrefetch: true */ 'pages/Collected'));
-const CommunityNft = lazy(() => import(/* webpackPrefetch: true */ 'pages/CommunityNft'));
-
-export const RoutesResolver = () => (
+export const Router = () => (
   <Routes>
     <Route path={ROUTES.home} element={<Root />}>
       <Route index element={<Home />} />

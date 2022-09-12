@@ -2,12 +2,12 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Input } from 'components/ui-kit/Input/Input';
+import { Field } from 'components/ui-kit/Filed/Filed';
 import { Button } from 'components/ui-kit/Button/Button';
-import { Textarea } from 'components/ui-kit/Textarea/Textarea';
+import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
 import { Label } from 'components/ui-kit/Label/Label';
-import { ImageInput } from 'components/ui-kit/ImageInput/ImageInput';
-import { AttributesInput } from 'components/ui-kit/AttributesInput/AttributesInput';
+import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
+import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
 import { TokenMetadata } from 'typedefs/common';
 import {
   setFileToLS,
@@ -109,7 +109,7 @@ export const TokenMetadataForm = (props: Props) => {
         title="Image of your item"
         htmlFor="image"
       >
-        <ImageInput
+        <ImageFiled
           name="image"
           control={control}
           id="image"
@@ -121,7 +121,7 @@ export const TokenMetadataForm = (props: Props) => {
         htmlFor="name"
         optional
       >
-        <Input
+        <Field
           name="name"
           control={control}
           id="name"
@@ -134,7 +134,7 @@ export const TokenMetadataForm = (props: Props) => {
         htmlFor="description"
         optional
       >
-        <Textarea
+        <TextFiled
           name="description"
           control={control}
           id="description"
@@ -143,7 +143,7 @@ export const TokenMetadataForm = (props: Props) => {
       </Label>
 
       <Label title="Item Attributes">
-        <AttributesInput
+        <AttributesField
           name="attributes"
           control={control}
         />

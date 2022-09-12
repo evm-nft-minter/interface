@@ -8,13 +8,15 @@ import cn from 'classnames';
 import style from 'components/ui-kit/Button/Button.module.scss';
 
 enum ButtonModeEnum {
-  Primary = 'primary',
-  Secondary = 'secondary',
+  PRIMARY = 'primary',
+  SECONDARY = 'secondary',
+  BORDER = 'border',
 }
 
 const MODE_TO_CLASS: Record<ButtonModeEnum, string> = {
-  [ButtonModeEnum.Primary]: style.primary,
-  [ButtonModeEnum.Secondary]: style.secondary,
+  [ButtonModeEnum.PRIMARY]: style.primary,
+  [ButtonModeEnum.SECONDARY]: style.secondary,
+  [ButtonModeEnum.BORDER]: style.border,
 };
 
 interface Props extends PropsWithChildren,
@@ -29,19 +31,14 @@ type ButtonType = FC<Props> & {
 export const Button = memo((props: Props) => {
   const {
     className,
-    mode = ButtonModeEnum.Primary,
+    mode = ButtonModeEnum.PRIMARY,
     ...rest
   } = props;
 
-  const rootClassName = cn(
-    className,
-    style.button,
-    MODE_TO_CLASS[mode],
-  );
-
   return (
     <button
-      className={rootClassName}
+      className={cn(MODE_TO_CLASS[mode], className)}
+      type="button"
       {...rest}
     >
       {props.children}

@@ -1,0 +1,43 @@
+@import "styles/utils";
+
+.header {
+  border-bottom: $c-line solid 1px;
+}
+
+.content {
+  width: 500px;
+  padding-top: 16px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldsName {
+  display: flex;
+  gap: 8px;
+
+  margin-right: 40px;
+  margin-bottom: 16px;
+
+  .name {
+    width: 50%;
+    padding-left: 8px;
+  }
+}
+
+.fieldsWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.addBtn {
+  height: 44px;
+  margin-top: 8px;
+}
+
+.saveBtn {
+  height: 48px;
+}

@@ -1,0 +1,113 @@
+@import "styles/utils";
+
+$field-height: 252px;
+$field-height-mobil: $field-height;
+
+$text-below-height: 20px;
+$text-below-height-mobil: 16px;
+
+$height: $field-height + $text-below-height;
+$height-mobil: $field-height-mobil + $text-below-height-mobil;
+
+.wrapper {
+  height: $height;
+
+  @include breakpoint(medium, down) {
+    height: $height-mobil;
+  }
+}
+
+.label {
+  position: relative;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+
+  width: 352px;
+  height: $field-height;
+  padding: 12px;
+
+  border: 3px dashed $c-border-field;
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  cursor: pointer;
+
+  @include breakpoint(medium, down) {
+    height: $field-height-mobil;
+  }
+
+  &.error {
+    border-color: $c-error;
+  }
+
+  &:hover .background {
+    background: darken($c-background-field, 10);
+    color: darken($c-border-field, 20);
+
+    &.hidden {
+      opacity: 0.7;
+    }
+  }
+}
+
+.filed {
+  position: absolute;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  background: $c-background-field;
+  color: $c-border-field;
+
+  transition: 0.25s;
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  .imgIcon {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+.removeBtn {
+  position: relative;
+  z-index: 3;
+
+  padding: 4px;
+
+  .closeIcon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}

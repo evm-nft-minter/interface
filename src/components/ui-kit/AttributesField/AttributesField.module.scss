@@ -1,22 +1,23 @@
 @import "styles/utils";
 
-.attributes {
-  display: flex;
-  flex-wrap: wrap;
+.wrapper {}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 140px);
   gap: 8px;
 
   padding: 8px;
 
-  outline: 2px solid #2c2f36;
+  outline: 2px solid $c-line;
   border-radius: 12px;
 }
 
-$attribute-color: lighten(#2172e5, 10);
+$attribute-color: lighten($c-blue-prime, 10);
 $attribute-background: transparentize($attribute-color, 0.95);
 
 .attribute {
   height: 68px;
-  width: 140px;
   padding: 12px;
 
   border: 1px solid $attribute-color;
@@ -35,7 +36,8 @@ $attribute-background: transparentize($attribute-color, 0.95);
 
   .value {
     @extend %t-inter-15-normal;
-    color: #ebebeb
+
+    color: $c-text-primary;
   }
 
   .name,

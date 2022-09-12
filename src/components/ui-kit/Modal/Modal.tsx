@@ -1,12 +1,23 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo } from 'react';
 import ReactModal from 'react-modal';
+import { ModalHeader } from 'components/ui-kit/Modal/ModalHeader';
+import { ModalContent } from 'components/ui-kit/Modal/ModalContent';
+import { ModalFooter } from 'components/ui-kit/Modal/ModalFooter';
+import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
 import style from 'components/ui-kit/Modal/Modal.module.scss';
 
 ReactModal.setAppElement('body');
 
-interface Props extends PropsWithChildren {
+interface ChildrenProps {
+  ModalHeader: typeof ModalHeader
+  ModalContent: typeof ModalContent
+  ModalFooter: typeof ModalFooter
+}
+
+interface Props {
   isOpen: boolean
-  onClose: () => void
+  onClose?: () => void
+  children: (childrenProps: ChildrenProps) => React.ReactNode
 }
 
 export const Modal = memo((props: Props) => {
@@ -17,13 +28,27 @@ export const Modal = memo((props: Props) => {
 
   return (
     <ReactModal
+      className={style.modal}
+      overlayClassName={style.overlay}
+      portalClassName={style.portal}
       isOpen={isOpen}
       onRequestClose={onClose}
-      portalClassName={style.portal}
     >
-      <div className={style.modal}>
-        {props.children}
-      </div>
+      {onClose && (
+        <button
+          className={style.closeBtn}
+          onClick={onClose}
+          type="button"
+        >
+          <CloseIcon className={style.closeIcon} />
+        </button>
+      )}
+
+      {props.children({
+        ModalHeader,
+        ModalContent,
+        ModalFooter,
+      })}
     </ReactModal>
   );
 });

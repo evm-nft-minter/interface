@@ -5,7 +5,8 @@ import {
   FieldValues,
   useController,
 } from 'react-hook-form';
-import style from 'components/ui-kit/Textarea/Textarea.module.scss';
+import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
+import style from 'components/ui-kit/Filed/Filed.module.scss';
 
 interface Props<T extends FieldValues> {
   name: FieldPath<T>
@@ -15,7 +16,7 @@ interface Props<T extends FieldValues> {
   id?: string
 }
 
-export const Textarea = <T extends FieldValues>(props: Props<T>) => {
+export const Field = <T extends FieldValues>(props: Props<T>) => {
   const {
     name,
     control,
@@ -35,22 +36,19 @@ export const Textarea = <T extends FieldValues>(props: Props<T>) => {
   });
 
   return (
-    <div className={style.wrapper}>
-      <textarea
+    <FiledWrapper
+      className={style.wrapper}
+      error={error?.message}
+    >
+      <input
         {...field}
+        className={cn(style.field, { [style.error]: error })}
         value={field.value || ''}
-        className={cn(style.textarea, { [style.error]: error })}
-        placeholder={placeholder}
-        autoComplete="off"
         disabled={disabled}
+        placeholder={placeholder}
         id={id}
+        autoComplete="off"
       />
-
-      {error && (
-        <p className={cn(style.textBelow, style.error)}>
-          {error.message}
-        </p>
-      )}
-    </div>
+    </FiledWrapper>
   );
 };

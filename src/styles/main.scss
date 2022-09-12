@@ -13,9 +13,9 @@ html {
 body {
   margin: 0;
 
-  background: #23262F;
+  background: #23262f;
 
-  color: #ebebeb;
+  color: $c-text-primary;
 
   overflow-x: hidden;
 }
@@ -30,7 +30,11 @@ body {
   width: 200vw;
   height: 200vh;
 
-  background: radial-gradient(50% 50% at 50% 50%,#fc077d10 0,rgba(255,255,255,0) 100%);
-  transform: translate(-50vw,-100vh);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #fc077d10 0,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translate(-50vw, -100vh);
   pointer-events: none;
 }
