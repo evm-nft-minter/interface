@@ -19,7 +19,6 @@ export const useWalletStatus = () => {
 
     try {
       await connect(_provider);
-      setStatus(StatusEnum.CONNECTED);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
@@ -30,11 +29,6 @@ export const useWalletStatus = () => {
       ));
     }
   }, [connect]);
-
-  const handleDisconnect = useCallback(() => {
-    disconnect();
-    setStatus(StatusEnum.INITIAL);
-  }, [disconnect]);
 
   const updateStatus = useCallback(() => {
     setStatus(account ? StatusEnum.CONNECTED : StatusEnum.INITIAL);
@@ -49,7 +43,7 @@ export const useWalletStatus = () => {
     status,
     provider,
     handleConnect,
-    handleDisconnect,
+    handleDisconnect: disconnect,
     updateStatus,
   };
 };

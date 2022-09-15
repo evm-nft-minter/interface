@@ -11,7 +11,7 @@ enum ButtonModeEnum {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   BORDER = 'border',
-  // TODO: remove comments
+  // TODO: think about necessity of these types
   // ICON = 'icon',
   // TRANSPARENT = 'transparent',
   // BORDERLESS = 'borderless',
