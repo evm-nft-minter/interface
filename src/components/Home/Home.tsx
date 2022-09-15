@@ -2,6 +2,7 @@ import Marquee from 'react-fast-marquee';
 import style from 'components/Home/Home.module.scss';
 
 const IMAGES = [
+  // TODO: remove comments
   // '/images/alex_nft1.jpeg',
   // '/images/alex_nft2.jpeg',
   '/images/alex_nft3.jpeg',
@@ -15,7 +16,6 @@ export const Home = () => {
     <div>
       <Marquee
         className={style.marquee}
-        pauseOnHover
         gradient={false}
       >
         {IMAGES.map((src) => (

@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { Control } from 'react-hook-form';
 import { Field } from 'components/ui-kit/Filed/Filed';
-import { Attribute } from 'typedefs/common';
+import { TokenAttribute } from 'packages/token';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
 import style from 'components/ui-kit/AttributesField/AttributeFieldGroup.module.scss';
 
-interface Props extends Attribute {
+interface Props extends TokenAttribute {
   control: Control
-  onRemove: (id: Attribute['id']) => void
+  onRemove: (id: TokenAttribute['id']) => void
 }
 
 export const AttributeFieldGroup = (props: Props) => {

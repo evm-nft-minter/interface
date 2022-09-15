@@ -1,20 +1,20 @@
 import { useCallback, useEffect } from 'react';
 import { AttributeFieldGroup } from 'components/ui-kit/AttributesField/AttributeFieldGroup';
+import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Modal } from 'components/ui-kit/Modal/Modal';
 import { useForm } from 'react-hook-form';
-import { Button } from 'components/ui-kit/Button/Button';
-import { generateAttribute } from 'tools/common';
-import { Attribute } from 'typedefs/common';
+import { Button } from 'components/ui-kit/buttons/Button/Button';
+import { TokenAttribute, generateAttribute } from 'packages/token';
 import style from 'components/ui-kit/AttributesField/AddAttributesModal.module.scss';
 
 interface Props {
   isOpen: boolean
   onClose: () => void
-  attributes: Attribute[]
-  onSave: (attr: Attribute[]) => void
+  attributes: TokenAttribute[]
+  onSave: (attr: TokenAttribute[]) => void
 }
 
-type FieldValues = Record<string, Attribute>;
+type FieldValues = Record<string, TokenAttribute>;
 
 export const AddAttributesModal = (props: Props) => {
   const {
@@ -32,8 +32,6 @@ export const AddAttributesModal = (props: Props) => {
     register,
     unregister,
   } = useForm<FieldValues>();
-
-  const values = watch();
 
   const addAttr = useCallback(() => {
     const newAttr = generateAttribute();
@@ -100,53 +98,57 @@ export const AddAttributesModal = (props: Props) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
+  const values = watch();
+
   return (
     <Modal
       isOpen={isOpen}
       onClose={handleClose}
     >
-      {({ ModalHeader, ModalContent, ModalFooter }) => (
-        <>
-          <ModalHeader className={style.header}>
-            <h2>Attributes</h2>
-          </ModalHeader>
+      <ModalContent>
+        {({ ModalHeader, ModalMain, ModalFooter }) => (
+          <>
+            <ModalHeader className={style.header}>
+              <h2>Attributes</h2>
+            </ModalHeader>
 
-          <ModalContent className={style.content}>
-            <div className={style.fieldsName}>
-              <p className={style.name}>Name</p>
-              <p className={style.name}>Vale</p>
-            </div>
+            <ModalMain className={style.main}>
+              <div className={style.fieldsName}>
+                <p className={style.name}>Name</p>
+                <p className={style.name}>Vale</p>
+              </div>
 
-            <div className={style.fieldsWrapper}>
-              {Object.entries(values).map(([name, value]) => (
-                <AttributeFieldGroup
-                  key={name}
-                  {...value}
-                  control={control}
-                  onRemove={removeAttr}
-                />
-              ))}
-            </div>
+              <div className={style.fieldsWrapper}>
+                {Object.entries(values).map(([name, value]) => (
+                  <AttributeFieldGroup
+                    key={name}
+                    {...value}
+                    control={control}
+                    onRemove={removeAttr}
+                  />
+                ))}
+              </div>
 
-            <Button
-              className={style.addBtn}
-              onClick={addAttr}
-              mode={Button.mode.SECONDARY}
-            >
-              Add More
-            </Button>
-          </ModalContent>
+              <Button
+                className={style.addBtn}
+                onClick={addAttr}
+                mode={Button.mode.SECONDARY}
+              >
+                Add More
+              </Button>
+            </ModalMain>
 
-          <ModalFooter className={style.footer}>
-            <Button
-              className={style.saveBtn}
-              onClick={handleSave}
-            >
-              Save
-            </Button>
-          </ModalFooter>
-        </>
-      )}
+            <ModalFooter className={style.footer}>
+              <Button
+                className={style.saveBtn}
+                onClick={handleSave}
+              >
+                Save
+              </Button>
+            </ModalFooter>
+          </>
+        )}
+      </ModalContent>
     </Modal>
   );
 };

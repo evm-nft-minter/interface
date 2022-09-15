@@ -1,0 +1,26 @@
+@import "styles/utils";
+
+.container {
+  @extend %t-inter-16-normal;
+
+  display: flex;
+  align-items: center;
+
+  height: 36px;
+  padding: 0 14px;
+
+  border: 1px solid $c-gray;
+  border-radius: 10px;
+
+  background: $c-gray;
+
+  &:hover {
+    border-color: #353841;
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}

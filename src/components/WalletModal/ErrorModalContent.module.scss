@@ -1,0 +1,37 @@
+@import "styles/utils";
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  padding: 16px 36px 32px;
+}
+
+.title {
+  @extend %t-inter-20-normal;
+
+  margin-bottom: 12px;
+
+  text-align: center;
+}
+
+.text {
+  @extend %t-inter-14-normal;
+
+  margin-bottom: 36px;
+
+  text-align: center;
+}
+
+.backToWalletBtn {
+  @extend %t-inter-13-normal;
+
+  width: fit-content;
+  margin: 20px auto 0;
+
+  color: $c-blue-primary;
+
+  &:hover {
+    color: lighten($c-blue-primary, 20);
+  }
+}

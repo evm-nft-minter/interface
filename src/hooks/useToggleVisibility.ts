@@ -4,7 +4,6 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { useLocalStorage } from 'hooks/useLocalStorage';
 
 interface Options {
   initialVisibility?: boolean
@@ -16,22 +15,17 @@ export const useToggleVisibility = (options?: Options) => {
   const {
     initialVisibility = false,
     targetElement,
-    localStorageKey,
   } = options || {};
 
-  /* eslint-disable react-hooks/rules-of-hooks */
-  const [isVisible, setIsVisible] = localStorageKey
-    ? useLocalStorage(localStorageKey, initialVisibility)
-    : useState(initialVisibility);
-  /* eslint-enable react-hooks/rules-of-hooks */
+  const [isVisible, setIsVisible] = useState(initialVisibility);
 
   const toggleVisibility = useCallback(() => {
     setIsVisible((prev) => !prev);
-  }, [setIsVisible]);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      if (!isVisible || !targetElement?.current) {
+      if (!(isVisible && targetElement?.current)) {
         return;
       }
 
@@ -49,7 +43,7 @@ export const useToggleVisibility = (options?: Options) => {
     }
 
     return () => window.removeEventListener('click', handleClickOutside);
-  }, [isVisible, targetElement, setIsVisible]);
+  }, [isVisible, targetElement]);
 
   return [isVisible, toggleVisibility] as const;
 };

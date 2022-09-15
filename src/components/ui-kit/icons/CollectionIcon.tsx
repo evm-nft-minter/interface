@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { FCIcon } from 'components/ui-kit/icons/icon.typedefs';
+import { FCIcon } from 'components/ui-kit/icons/typedefs';
 
 export const CollectionIcon: FCIcon = memo((props) => (
   <svg

@@ -1,0 +1,22 @@
+@import "styles/utils";
+
+.container {
+  @extend %t-inter-16-normal;
+
+  display: flex;
+  align-items: center;
+
+  height: 36px;
+  padding: 0 14px;
+
+  border: 1px solid $c-blue;
+  border-radius: 10px;
+
+  color: #5090ea;
+  background: $c-blue-dark;
+
+  &:hover {
+    color: #3982e7;
+    border-color: $c-blue-light;
+  }
+}

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'components/ui-kit/Button/Button';
+import { Button } from 'components/ui-kit/buttons/Button/Button';
 import { CollectionIcon } from 'components/ui-kit/icons/CollectionIcon';
 import { CollectedIcon } from 'components/ui-kit/icons/CollectedIcon';
 import { ROUTES } from 'routes/routes';

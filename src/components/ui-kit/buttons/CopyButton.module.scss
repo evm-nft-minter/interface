@@ -1,0 +1,32 @@
+@import "styles/utils";
+
+.button {
+  @extend %t-inter-14-normal;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: #4c82fb;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.4;
+  }
+
+  &.copied {
+    opacity: 1;
+  }
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.checkIcon {
+  color: #40b66b;
+}

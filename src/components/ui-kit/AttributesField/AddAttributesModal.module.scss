@@ -4,9 +4,11 @@
   border-bottom: $c-line solid 1px;
 }
 
-.content {
+.main {
   width: 500px;
   padding-top: 16px;
+
+  overflow: auto;
 }
 
 .footer {

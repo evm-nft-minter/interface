@@ -1,6 +1,6 @@
 import { TokenMetadataForm } from 'components/TokenMetadataForm/TokenMetadataForm';
 import { useCallback } from 'react';
-import { TokenMetadata } from 'typedefs/common';
+import { TokenMetadata } from 'packages/token';
 import style from 'components/CreateItem/CreateItem.module.scss';
 
 export const CreateItem = () => {
