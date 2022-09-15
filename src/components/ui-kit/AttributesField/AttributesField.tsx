@@ -37,7 +37,7 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
 
   const attributes = field.value || [] as TokenAttribute[];
 
-  const [isFiledModalOpen, toggleFiledModal] = useModal();
+  const [isFieldModalOpen, toggleFieldModal] = useModal();
 
   return (
     <FiledWrapper
@@ -48,14 +48,14 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
         <button
           className={style.addBtn}
           type="button"
-          onClick={toggleFiledModal}
+          onClick={toggleFieldModal}
         >
           <PlusIcon />
         </button>
 
         <AddAttributesModal
-          isOpen={isFiledModalOpen}
-          onClose={toggleFiledModal}
+          isOpen={isFieldModalOpen}
+          onClose={toggleFieldModal}
           attributes={attributes}
           onSave={onChange}
         />

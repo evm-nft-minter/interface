@@ -16,7 +16,7 @@ export const ConnectedWallet = () => {
         network={network}
       />
 
-      {account && sliceStringFromTo(account, 6, -4)}
+      {sliceStringFromTo(account || '', 6, -4)}
     </span>
   );
 };

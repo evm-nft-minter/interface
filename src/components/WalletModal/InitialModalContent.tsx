@@ -1,34 +1,19 @@
-import { useCallback } from 'react';
-import { isMobile } from 'react-device-detect';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { ConnectButton } from 'components/WalletModal/ConnectButton';
-import { ProviderEnum, MetaMask } from 'packages/providers';
+import { ProviderEnum } from 'packages/providers';
+import { useHandleConnect } from 'components/WalletModal/hooks/useHandleConnect';
 import style from 'components/WalletModal/InitialModalContent.module.scss';
 
 interface Props {
-  onSelectProvider: (provider: ProviderEnum) => void
+  onConnect: (provider: ProviderEnum) => void
 }
 
 export const InitialModalContent = (props: Props) => {
   const {
-    onSelectProvider,
+    onConnect,
   } = props;
 
-  const handleSelectMetamask = useCallback(() => {
-    if (MetaMask.isInstalled()) {
-      onSelectProvider(ProviderEnum.META_MASK);
-
-      return;
-    }
-
-    if (isMobile) {
-      const { host, pathname } = window.location;
-
-      window.location.href = `${MetaMask.MOBILE_APP_URL}/${host}${pathname}`;
-    } else {
-      window.open(MetaMask.EXTENSION_URL, '_blank');
-    }
-  }, [onSelectProvider]);
+  const handleConnect = useHandleConnect(onConnect);
 
   return (
     <ModalContent>
@@ -41,12 +26,12 @@ export const InitialModalContent = (props: Props) => {
           <ModalMain className={style.main}>
             <ConnectButton
               provider={ProviderEnum.META_MASK}
-              onClick={handleSelectMetamask}
+              onClick={handleConnect}
             />
 
             <ConnectButton
               provider={ProviderEnum.WALLET_CONNECT}
-              onClick={onSelectProvider}
+              onClick={handleConnect}
             />
           </ModalMain>
         </>

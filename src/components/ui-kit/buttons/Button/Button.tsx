@@ -11,6 +11,10 @@ enum ButtonModeEnum {
   PRIMARY = 'primary',
   SECONDARY = 'secondary',
   BORDER = 'border',
+  // TODO: remove comments
+  // ICON = 'icon',
+  // TRANSPARENT = 'transparent',
+  // BORDERLESS = 'borderless',
 }
 
 const MODE_TO_CLASS: Record<ButtonModeEnum, string> = {

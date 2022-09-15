@@ -133,11 +133,12 @@ export const WalletProvider = (props: PropsWithChildren) => {
         toggleWalletModal,
       }}
     >
+      {props.children}
+
       <WalletModal
         isOpen={isWalletModalOpen}
         onClose={toggleWalletModal}
       />
-      {props.children}
     </CtxProvider>
   );
 };

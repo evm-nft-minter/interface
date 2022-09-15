@@ -20,6 +20,10 @@
   position: relative;
 }
 
+.bodyOpen {
+  overflow: hidden
+}
+
 .closeBtn {
   position: absolute;
   right: 16px;

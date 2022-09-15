@@ -1,8 +1,8 @@
 import { ProviderEnum } from 'packages/providers';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import style from 'components/WalletModal/ErrorModalContent.module.scss';
 import { BackButton } from 'components/ui-kit/buttons/BackButton';
+import style from 'components/WalletModal/ErrorModalContent.module.scss';
 
 interface Props {
   provider: ProviderEnum | null

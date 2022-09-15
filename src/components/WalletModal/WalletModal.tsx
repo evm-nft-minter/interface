@@ -1,23 +1,16 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Modal } from 'components/ui-kit/Modal/Modal';
-import { useWallet } from 'contexts/walletCtx';
-import { ProviderEnum } from 'packages/providers';
 import { InitialModalContent } from 'components/WalletModal/InitialModalContent';
 import { ConnectingModalContent } from 'components/WalletModal/ConnectingModalContent';
 import { ErrorModalContent } from 'components/WalletModal/ErrorModalContent';
 import { ConnectedModalContent } from 'components/WalletModal/ConnectedModalContent';
+import { StatusEnum } from 'components/WalletModal/walletModal.typedefs';
+import { useWalletStatus } from 'components/WalletModal/hooks/useWalletStatus';
 import style from 'components/WalletModal/WalletModal.module.scss';
 
 interface Props {
   isOpen: boolean
   onClose: () => void
-}
-
-enum StatusEnum {
-  INITIAL = 'initial',
-  CONNECTING = 'connecting',
-  ERROR = 'error',
-  CONNECTED = 'connected',
 }
 
 export const WalletModal = (props: Props) => {
@@ -27,55 +20,17 @@ export const WalletModal = (props: Props) => {
   } = props;
 
   const {
-    account,
-    connect,
-    disconnect,
-  } = useWallet();
-
-  const [
-    status, setStatus,
-  ] = useState<StatusEnum>(StatusEnum.INITIAL);
-  const [provider, setProvider] = useState<ProviderEnum | null>(null);
-
-  const handleConnect = useCallback(async (_provider: ProviderEnum) => {
-    setStatus(StatusEnum.CONNECTING);
-
-    try {
-      await connect(_provider);
-      setStatus(StatusEnum.CONNECTED);
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
-      setStatus((prev) => (
-        prev === StatusEnum.CONNECTING
-          ? StatusEnum.ERROR
-          : prev
-      ));
-    }
-  }, [connect]);
-
-  const handleSelectProvider = useCallback((_provider: ProviderEnum) => {
-    setProvider(_provider);
-    handleConnect(_provider);
-  }, [handleConnect]);
-
-  const handleDisconnect = useCallback(() => {
-    disconnect();
-    setStatus(StatusEnum.INITIAL);
-  }, [disconnect]);
-
-  const goToInitial = useCallback(() => {
-    setProvider(null);
-    setStatus(StatusEnum.INITIAL);
-  }, []);
+    status,
+    provider,
+    handleConnect,
+    handleDisconnect,
+    updateStatus,
+  } = useWalletStatus();
 
   useEffect(() => {
-    setStatus(
-      account
-        ? StatusEnum.CONNECTED
-        : StatusEnum.INITIAL,
-    );
-  }, [account, isOpen]);
+    updateStatus();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen]);
 
   return (
     <Modal
@@ -85,13 +40,13 @@ export const WalletModal = (props: Props) => {
       <div className={style.container}>
         {status === StatusEnum.INITIAL && (
           <InitialModalContent
-            onSelectProvider={handleSelectProvider}
+            onConnect={handleConnect}
           />
         )}
 
         {status === StatusEnum.CONNECTING && (
           <ConnectingModalContent
-            onClickBack={goToInitial}
+            onClickBack={updateStatus}
           />
         )}
 
@@ -99,7 +54,7 @@ export const WalletModal = (props: Props) => {
           <ErrorModalContent
             provider={provider}
             onTryAgain={handleConnect}
-            onClickBack={goToInitial}
+            onClickBack={updateStatus}
           />
         )}
 

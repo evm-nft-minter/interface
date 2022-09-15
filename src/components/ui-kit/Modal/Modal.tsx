@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react';
+import { PropsWithChildren } from 'react';
 import ReactModal from 'react-modal';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
 import style from 'components/ui-kit/Modal/Modal.module.scss';
@@ -16,19 +16,12 @@ export const Modal = (props: Props) => {
     onClose,
   } = props;
 
-  useEffect(() => {
-    if (isOpen) {
-      window.document.body.style.overflow = 'hidden';
-    } else {
-      window.document.body.style.overflow = 'auto';
-    }
-  }, [isOpen]);
-
   return (
     <ReactModal
       className={style.modal}
       overlayClassName={style.overlay}
       portalClassName={style.portal}
+      bodyOpenClassName={style.bodyOpen}
       isOpen={isOpen}
       onRequestClose={onClose}
     >

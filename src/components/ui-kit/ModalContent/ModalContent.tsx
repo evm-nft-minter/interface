@@ -10,7 +10,7 @@ interface ChildrenProps {
 }
 
 interface Props {
-  children: (p: ChildrenProps) => React.ReactNode
+  children: (props: ChildrenProps) => React.ReactNode
 }
 
 export const ModalContent = (props: Props) => {
