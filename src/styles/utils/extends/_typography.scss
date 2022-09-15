@@ -13,6 +13,12 @@
   font-size: 13px;
 }
 
+%t-inter-14-normal {
+  @extend %t-inter-normal;
+  font-size: 14px;
+  line-height: 17px;
+}
+
 %t-inter-15-normal {
   @extend %t-inter-normal;
   font-size: 15px;
@@ -29,6 +35,12 @@
   @extend %t-inter-normal;
   font-size: 18px;
   line-height: 22px;
+}
+
+%t-inter-20-normal {
+  @extend %t-inter-normal;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 %t-plex-12-normal {

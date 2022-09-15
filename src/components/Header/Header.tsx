@@ -1,8 +1,8 @@
 import { useEffect, memo, useState } from 'react';
 import cn from 'classnames';
 import { Logo } from 'components/Header/Logo';
-import { WalletStatus } from 'components/Header/WalletStatus';
 import { NavDropdown } from 'components/Header/NavDropdown';
+import { WalletButton } from 'components/ui-kit/buttons/WalletButton/WalletButton';
 import style from 'components/Header/Header.module.scss';
 
 export const Header = memo(() => {
@@ -38,7 +38,7 @@ export const Header = memo(() => {
         <Logo />
       </div>
 
-      <WalletStatus />
+      <WalletButton />
 
       <NavDropdown />
     </header>

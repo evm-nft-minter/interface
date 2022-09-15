@@ -1,0 +1,76 @@
+@import "styles/utils";
+
+%button {
+  @extend %t-inter-18-normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 44px;
+  padding: 0 24px;
+
+  border-radius: 12px;
+
+  transition: 0.25s;
+
+  @include breakpoint(medium, down) {
+    height: 40px;
+  }
+}
+
+.primary {
+  @extend %button;
+
+  background: $c-blue-primary;
+
+  &:hover {
+    background: #1966d4;
+  }
+
+  &:active {
+    box-shadow: #165bbd 0px 0px 0px 1pt;
+    background: #165bbd;
+  }
+}
+
+.secondary {
+  @extend %button;
+
+  background: $c-line;
+
+  &:hover {
+    background: lighten($c-line, 20);
+  }
+
+  &:active {
+    background: lighten($c-line, 10);
+  }
+}
+
+.border {
+  @extend %t-inter-13-normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 26px;
+
+  border: 1px solid #376bad70;
+  border-radius: 12px;
+
+  padding: 0 6px;
+
+  color: $c-blue-primary;
+
+  &:hover {
+    border-color: #4d8fea;
+    text-decoration: underline;
+  }
+
+  &:active {
+    border-color: #4d8fea;
+    box-shadow: #376bad70 0px 0px 0px 1pt;
+  }
+}

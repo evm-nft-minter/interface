@@ -13,7 +13,7 @@
   border-radius: 12px;
 }
 
-$attribute-color: lighten($c-blue-prime, 10);
+$attribute-color: lighten($c-blue-primary, 10);
 $attribute-background: transparentize($attribute-color, 0.95);
 
 .attribute {

@@ -1,4 +1,4 @@
-@import 'styles/utils';
+@import "styles/utils";
 
 .portal {
   position: relative;
@@ -17,26 +17,19 @@
 }
 
 .modal {
-  @extend %card;
-
   position: relative;
-
-  display: flex;
-  flex-direction: column;
-
-  max-height: 100vh;
 }
 
 .closeBtn {
   position: absolute;
   right: 16px;
-  top: 13px;
+  top: 16px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 6px;
+  padding: 5px;
 
   .closeIcon {
     width: 14px;

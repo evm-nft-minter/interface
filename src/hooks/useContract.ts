@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
+import { NetworkEnum } from 'packages/networks';
 import { useNetwork } from 'hooks/useNetwork';
-import { NetworkEnum } from 'networks/typedefs';
 
 export const useContract = (
   network: NetworkEnum,

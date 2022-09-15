@@ -5,13 +5,17 @@ import {
   useState,
 } from 'react';
 import { TransactionConfig, TransactionReceipt } from 'web3-core';
-import { makeContext } from 'tools/makeContext';
-import { NetworkEnum } from 'networks/typedefs';
-import { ProviderEnum, ProviderEventEnum } from 'providers/typedefs';
-import { Provider } from 'providers/Provider';
-import { makeProvider } from 'providers/makeProvider';
+import { makeContext } from 'packages/makeContext';
+import { CHAIN_ID_TO_NETWORK, NetworkEnum } from 'packages/networks';
+import {
+  ProviderEnum,
+  ProviderEventEnum,
+  Provider,
+  makeProvider,
+} from 'packages/providers';
 import { useLocalStorage } from 'hooks/useLocalStorage';
-import { CHAIN_ID_TO_NETWORK } from 'networks/networks';
+import { WalletModal } from 'components/WalletModal/WalletModal';
+import { useModal } from 'hooks/useModal';
 
 interface WalletCtx {
   account: string | null
@@ -22,6 +26,7 @@ interface WalletCtx {
   disconnect: () => void
   sendTx: (tx: TransactionConfig) => Promise<TransactionReceipt>
   switchNetwork: (network: NetworkEnum) => Promise<boolean>
+  toggleWalletModal: () => void
 }
 
 const context = makeContext<WalletCtx>('useWallet');
@@ -83,9 +88,12 @@ export const WalletProvider = (props: PropsWithChildren) => {
 
   useEffect(() => {
     if (account && providerType) {
-      connect(providerType).catch(() => {
-        disconnect();
-      });
+      connect(providerType)
+        .catch((e) => {
+          // eslint-disable-next-line no-console
+          console.error(e);
+          disconnect();
+        });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -109,6 +117,8 @@ export const WalletProvider = (props: PropsWithChildren) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider]);
 
+  const [isWalletModalOpen, toggleWalletModal] = useModal();
+
   return (
     <CtxProvider
       value={{
@@ -120,8 +130,13 @@ export const WalletProvider = (props: PropsWithChildren) => {
         connect,
         sendTx,
         switchNetwork,
+        toggleWalletModal,
       }}
     >
+      <WalletModal
+        isOpen={isWalletModalOpen}
+        onClose={toggleWalletModal}
+      />
       {props.children}
     </CtxProvider>
   );

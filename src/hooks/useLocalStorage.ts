@@ -11,9 +11,9 @@ export const useLocalStorage = <T>(
       const item = window.localStorage.getItem(key);
 
       return item ? JSON.parse(item) : initial;
-    } catch (error) {
+    } catch (e) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error(e);
 
       return initial;
     }
@@ -28,9 +28,9 @@ export const useLocalStorage = <T>(
 
         return next;
       });
-    } catch (error) {
+    } catch (e) {
       // eslint-disable-next-line no-console
-      console.error(error);
+      console.error(e);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

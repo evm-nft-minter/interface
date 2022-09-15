@@ -3,18 +3,18 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Field } from 'components/ui-kit/Filed/Filed';
-import { Button } from 'components/ui-kit/Button/Button';
+import { Button } from 'components/ui-kit/buttons/Button/Button';
 import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
 import { Label } from 'components/ui-kit/Label/Label';
 import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
 import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
-import { TokenMetadata } from 'typedefs/common';
+import { TokenMetadata } from 'packages/token';
 import {
   setFileToLS,
   getFileFromLS,
   getItemFromLS,
   setItemToLS,
-} from 'tools/localStorage';
+} from 'packages/localStorage';
 import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 
 type FieldValues = Nullable<TokenMetadata>;
@@ -84,7 +84,7 @@ export const TokenMetadataForm = (props: Props) => {
   }, [onSubmit]);
 
   useEffect(() => {
-    const storeFromState = () => {
+    const setStateToLS = () => {
       const {
         image,
         ...value
@@ -94,9 +94,9 @@ export const TokenMetadataForm = (props: Props) => {
       setFileToLS(`${localStorageKey}.image`, image);
     };
 
-    window.addEventListener('beforeunload', storeFromState);
+    window.addEventListener('beforeunload', setStateToLS);
 
-    return storeFromState;
+    return setStateToLS;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

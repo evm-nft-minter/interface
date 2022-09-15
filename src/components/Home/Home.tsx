@@ -15,7 +15,6 @@ export const Home = () => {
     <div>
       <Marquee
         className={style.marquee}
-        pauseOnHover
         gradient={false}
       >
         {IMAGES.map((src) => (

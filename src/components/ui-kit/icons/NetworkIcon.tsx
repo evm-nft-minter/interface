@@ -1,6 +1,6 @@
 import { FC, memo } from 'react';
-import { SvgProps } from 'components/ui-kit/icons/icon.typedefs';
-import { NetworkEnum } from 'networks/typedefs';
+import { NetworkEnum } from 'packages/networks';
+import { SvgProps } from 'components/ui-kit/icons/typedefs';
 import { EthereumIcon } from 'components/ui-kit/icons/EthereumIcon';
 import { PolygonIcon } from 'components/ui-kit/icons/PolygonIcon';
 

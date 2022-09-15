@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { ROUTES } from 'routes/routes';
 import Root from 'pages/Root';
@@ -7,14 +8,16 @@ import CreateItem from 'pages/CreateItem';
 import Collected from 'pages/Collected';
 import CommunityNft from 'pages/CommunityNft';
 
-export const Router = () => (
+export const Router = memo(() => (
   <Routes>
     <Route path={ROUTES.home} element={<Root />}>
       <Route index element={<Home />} />
 
       <Route path={ROUTES.create.index}>
         <Route index element={<Create />} />
+
         <Route path={ROUTES.create.item} element={<CreateItem />} />
+
         <Route path={ROUTES.create.collection} element={<>Collection</>} />
       </Route>
 
@@ -25,7 +28,8 @@ export const Router = () => (
         element={<CommunityNft />}
       />
 
-      <Route path="*" />
+      {/* TODO: handle 404 */}
+      <Route path="*" element={<>404</>} />
     </Route>
   </Routes>
-);
+));

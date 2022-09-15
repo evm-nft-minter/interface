@@ -5,7 +5,7 @@ import {
   FieldValues,
 } from 'react-hook-form';
 import { useModal } from 'hooks/useModal';
-import { Attribute } from 'typedefs/common';
+import { TokenAttribute } from 'packages/token';
 import { AddAttributesModal } from 'components/ui-kit/AttributesField/AddAttributesModal';
 import { PlusIcon } from 'components/ui-kit/icons/PlusIcon';
 import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
@@ -35,9 +35,9 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
     control,
   });
 
-  const attributes = field.value || [] as Attribute[];
+  const attributes = field.value || [] as TokenAttribute[];
 
-  const [isOpen, toggleIsOpen] = useModal();
+  const [isFiledModalOpen, toggleFiledModal] = useModal();
 
   return (
     <FiledWrapper
@@ -48,14 +48,14 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
         <button
           className={style.addBtn}
           type="button"
-          onClick={toggleIsOpen}
+          onClick={toggleFiledModal}
         >
           <PlusIcon />
         </button>
 
         <AddAttributesModal
-          isOpen={isOpen}
-          onClose={toggleIsOpen}
+          isOpen={isFiledModalOpen}
+          onClose={toggleFiledModal}
           attributes={attributes}
           onSave={onChange}
         />

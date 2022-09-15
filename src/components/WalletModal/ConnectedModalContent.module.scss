@@ -1,0 +1,38 @@
+@import "styles/utils";
+
+.main {
+  padding-bottom: 32px;
+}
+
+.borderContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  padding: 16px;
+
+  border: 1px solid $c-line;
+  border-radius: 16px;
+}
+
+.provider {
+  @extend %t-inter-13-normal;
+
+  color: #8f96ac
+}
+
+.accountContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.account {
+  @extend %t-inter-20-normal;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
