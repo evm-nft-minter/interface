@@ -5,7 +5,12 @@
   gap: 8px;
 }
 
-.submitBtn {
+.buttonPlace {
+  display: grid;
+  height: 48px;
   margin-top: 20px;
-  width: 35%;
+}
+
+.submitBtn {
+  height: 100%;
 }

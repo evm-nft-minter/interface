@@ -8,7 +8,7 @@ export const NETWORKS: Networks = {
     chainId: 4,
     name: 'Rinkeby Testnet',
     rpc: 'https://rinkeby.infura.io/v3/',
-    explorer: 'https://rinkeby.etherscan.io',
+    explorer: 'https://rinkeby.etherscan.io/',
     currency: 'ETH',
   },
   [NetworkEnum.POLYGON]: {
@@ -18,6 +18,30 @@ export const NETWORKS: Networks = {
     rpc: 'https://rpc-mainnet.maticvigil.com/',
     explorer: 'https://polygonscan.com/',
     currency: 'MATIC',
+  },
+  [NetworkEnum.BSC]: {
+    type: NetworkEnum.BSC,
+    chainId: 56,
+    name: 'BSC Mainnet',
+    rpc: 'https://bsc-dataseed.binance.org/',
+    explorer: 'https://bscscan.com/',
+    currency: 'BNB',
+  },
+  [NetworkEnum.AVALANCHE]: {
+    type: NetworkEnum.AVALANCHE,
+    chainId: 43114,
+    name: 'Avalanche Mainnet C-Chain',
+    rpc: 'https://api.avax.network/ext/bc/C/rpc',
+    explorer: 'https://snowtrace.io/',
+    currency: 'AVAX',
+  },
+  [NetworkEnum.FANTOM]: {
+    type: NetworkEnum.FANTOM,
+    chainId: 250,
+    name: 'Fantom Mainnet',
+    rpc: 'https://rpcapi.fantom.network/',
+    explorer: 'https://ftmscan.com/',
+    currency: 'FTM',
   },
 };
 

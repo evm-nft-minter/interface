@@ -1,4 +1,4 @@
-import { BackButton } from 'components/ui-kit/buttons/BackButton';
+import { LeftArrowIcon } from 'components/ui-kit/icons/LeftArrowIcon';
 import { Loader } from 'components/ui-kit/Loader/Loader';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import style from 'components/WalletModal/ConnectingModalContent.module.scss';
@@ -17,7 +17,12 @@ export const ConnectingModalContent = (props: Props) => {
       {({ ModalHeader, ModalMain }) => (
         <>
           <ModalHeader>
-            <BackButton onClick={onClickBack} />
+            <button
+              className={style.backBtn}
+              onClick={onClickBack}
+            >
+              <LeftArrowIcon className={style.backIcon} />
+            </button>
           </ModalHeader>
 
           <ModalMain className={style.main}>

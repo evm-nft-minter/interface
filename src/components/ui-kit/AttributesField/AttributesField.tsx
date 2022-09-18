@@ -40,10 +40,7 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
   const [isFieldModalOpen, toggleFieldModal] = useModal();
 
   return (
-    <FiledWrapper
-      className={style.wrapper}
-      error={error?.message}
-    >
+    <FiledWrapper error={error?.message}>
       <div className={style.field}>
         <button
           className={style.addBtn}
@@ -60,8 +57,9 @@ export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
           onSave={onChange}
         />
 
-        {attributes.map((attr) => (
-          <div key={attr.id} className={style.attribute}>
+        {attributes.map((attr, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div key={i} className={style.attribute}>
             <p className={style.name}>
               {attr.traitType}
             </p>

@@ -29,6 +29,7 @@ interface Props<T extends FieldValues> {
   id?: string
 }
 
+// TODO: move logic to hook
 export const ImageFiled = <T extends FieldValues>(props: Props<T>) => {
   const {
     name,
@@ -92,10 +93,7 @@ export const ImageFiled = <T extends FieldValues>(props: Props<T>) => {
   const error = invalidFileType ? 'Invalid file type' : fieldState.error?.message;
 
   return (
-    <FiledWrapper
-      className={style.wrapper}
-      error={error}
-    >
+    <FiledWrapper error={error}>
       <label
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}

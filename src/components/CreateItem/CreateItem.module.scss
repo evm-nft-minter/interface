@@ -11,18 +11,19 @@
   padding: 28px 38px 48px;
 }
 
-.title {
-  @extend %t-plex-20-normal;
-
+.header {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
 
-  padding-bottom: 28px;
+  padding: 0 28px 24px 0;
   margin-bottom: 20px;
 
   border-bottom: 1px solid $c-line;
+}
+
+.title {
+  @extend %t-plex-20-normal;
+
+  margin: 0 auto;
 }
 
 .formWrapper {

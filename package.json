@@ -15,8 +15,6 @@
     "lint": "eslint ./src"
   },
   "dependencies": {
-    "@fontsource/ibm-plex-mono": "^4.5.11",
-    "@fontsource/inter": "^4.5.12",
     "@hookform/resolvers": "^2.9.7",
     "@metamask/jazzicon": "^2.0.0",
     "@walletconnect/client": "^1.8.0",
@@ -31,7 +29,6 @@
     "react-hook-form": "^7.34.2",
     "react-modal": "^3.15.1",
     "react-router-dom": "^6.3.0",
-    "uuid": "^9.0.0",
     "web3": "^1.7.5",
     "web3-core": "^1.7.5",
     "web3-eth-contract": "^1.7.5",
@@ -44,7 +41,6 @@
     "@types/react-dom": "^18.0.0",
     "@types/react-modal": "^3.13.1",
     "@types/react-router-dom": "^5.3.3",
-    "@types/uuid": "^8.3.4",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "husky": "^8.0.1",

@@ -14,3 +14,16 @@
 .title {
   @extend %t-inter-20-normal;
 }
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px;
+}
+
+.backIcon {
+  width: 14px;
+  height: 14px;
+}

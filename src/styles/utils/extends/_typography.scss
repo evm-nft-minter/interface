@@ -49,10 +49,16 @@
   line-height: 17px;
 }
 
+%t-plex-16-norma {
+  @extend %t-plex-normal;
+  font-size: 16px;
+  line-height: 26px;
+}
+
 %t-plex-20-normal {
   @extend %t-plex-normal;
   font-size: 20px;
-  line-height: 28px;
+  line-height: 24px;
 }
 
 %t-plex-24-normal {

@@ -23,6 +23,19 @@
   text-align: center;
 }
 
+.backBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px;
+}
+
+.backIcon {
+  width: 14px;
+  height: 14px;
+}
+
 .backToWalletBtn {
   @extend %t-inter-13-normal;
 

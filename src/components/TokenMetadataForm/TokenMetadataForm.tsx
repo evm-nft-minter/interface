@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useMemo } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { Field } from 'components/ui-kit/Filed/Filed';
-import { Button } from 'components/ui-kit/buttons/Button/Button';
 import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
 import { Label } from 'components/ui-kit/Label/Label';
 import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
@@ -15,6 +19,7 @@ import {
   getItemFromLS,
   setItemToLS,
 } from 'packages/localStorage';
+import { Button } from 'components/ui-kit/buttons/Button/Button';
 import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 
 type FieldValues = Nullable<TokenMetadata>;
@@ -43,11 +48,14 @@ const schema = yup.object({
 interface Props {
   localStorageKey: string
   onSubmit: (metadata: TokenMetadata) => void
+  submitButton: ReactNode
 }
 
+// TODO: add hook useTokeMetadataForm
 export const TokenMetadataForm = (props: Props) => {
   const {
     localStorageKey,
+    submitButton,
     onSubmit,
   } = props;
 
@@ -149,12 +157,16 @@ export const TokenMetadataForm = (props: Props) => {
         />
       </Label>
 
-      <Button
-        className={style.submitBtn}
-        type="submit"
-      >
-        Next
-      </Button>
+      <div className={style.buttonPlace}>
+        {submitButton || (
+          <Button
+            className={style.submitBtn}
+            type="submit"
+          >
+            Save
+          </Button>
+        )}
+      </div>
     </form>
   );
 };
