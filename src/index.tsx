@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <HistoryRouter history={createBrowserHistory({ window })}>
+  <HistoryRouter history={createBrowserHistory({ window }) as any}>
     <App />
   </HistoryRouter>,
 );

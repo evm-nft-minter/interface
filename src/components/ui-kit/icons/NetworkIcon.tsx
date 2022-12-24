@@ -1,23 +1,23 @@
 import { FC, memo } from 'react';
-import { NetworkEnum } from 'packages/networks';
+import { ChainIdEnum } from 'packages/networks';
 import { SvgProps } from 'components/ui-kit/icons/typedefs';
 import { EthereumIcon } from 'components/ui-kit/icons/EthereumIcon';
 import { PolygonIcon } from 'components/ui-kit/icons/PolygonIcon';
 
 interface Props extends SvgProps {
-  network: NetworkEnum | null
+  chainId: ChainIdEnum | null
 }
 
 export const NetworkIcon: FC<Props> = memo((props) => {
   const {
-    network,
+    chainId,
     ...rest
   } = props;
 
-  switch (network) {
-    case NetworkEnum.ETHEREUM:
+  switch (chainId) {
+    case ChainIdEnum.ETHEREUM:
       return <EthereumIcon {...rest} />;
-    case NetworkEnum.POLYGON:
+    case ChainIdEnum.POLYGON:
       return <PolygonIcon {...rest} />;
   }
 

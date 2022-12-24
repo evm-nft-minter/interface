@@ -6,14 +6,14 @@ import style from 'components/ui-kit/buttons/WalletButton/ConnectedWallet.module
 export const ConnectedWallet = () => {
   const {
     account,
-    network,
+    chainId,
   } = useWallet();
 
   return (
     <span className={style.container}>
       <NetworkIcon
         className={style.icon}
-        network={network}
+        chainId={chainId}
       />
 
       {sliceStringFromTo(account || '', 6, -4)}

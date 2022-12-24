@@ -1,7 +1,5 @@
 import EventEmitter from 'events';
-import { numberToHex } from 'web3-utils';
-import { NETWORKS, NetworkEnum } from 'packages/networks';
-import { TransactionConfig, TransactionReceipt } from 'web3-core';
+import { NETWORKS, ChainIdEnum } from 'packages/networks';
 import { ProviderEventEnum } from 'packages/providers/typedefs';
 
 export abstract class Provider {
@@ -30,17 +28,20 @@ export abstract class Provider {
   }
 
   public async sendTx(
-    transactionConfig: TransactionConfig,
-  ): Promise<TransactionReceipt> {
+    transactionConfig: any,
+    // TODO: transactionConfig: TransactionConfig,
+  ): Promise<any> {
+  // TODO: ): Promise<TransactionReceipt> {
     return this._request('eth_sendTransaction', transactionConfig);
   }
 
-  public async addNetwork(networkType: NetworkEnum): Promise<boolean> {
-    const network = NETWORKS[networkType];
+  public async addNetwork(chainId: ChainIdEnum): Promise<boolean> {
+    const network = NETWORKS[chainId];
 
     try {
       await this._request('wallet_addEthereumChain', {
-        chainId: numberToHex(network.chainId),
+        chainId: network.chainId,
+        // TODO: chainId: numberToHex(network.chainId),
         chainName: network.name,
         nativeCurrency: {
           name: network.currency,
@@ -57,18 +58,17 @@ export abstract class Provider {
     }
   }
 
-  public async switchNetwork(networkType: NetworkEnum): Promise<boolean> {
-    const network = NETWORKS[networkType];
-
+  public async switchNetwork(chainId: ChainIdEnum): Promise<boolean> {
     try {
       await this._request('wallet_switchEthereumChain', {
-        chainId: numberToHex(network.chainId),
+        chainId,
+        // TODO: chainId: numberToHex(chainId),
       });
 
       return true;
     } catch (e: any) {
       if (e.code === 4902) {
-        return this.addNetwork(networkType);
+        return this.addNetwork(chainId);
       }
 
       return false;

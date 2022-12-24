@@ -4,9 +4,8 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { TransactionConfig, TransactionReceipt } from 'web3-core';
 import { makeContext } from 'packages/makeContext';
-import { CHAIN_ID_TO_NETWORK, NetworkEnum } from 'packages/networks';
+import { ChainIdEnum } from 'packages/networks';
 import {
   ProviderEnum,
   ProviderEventEnum,
@@ -19,13 +18,13 @@ import { useModal } from 'hooks/useModal';
 
 interface WalletCtx {
   account: string | null
-  chainId: number | null
-  network: NetworkEnum | null
+  chainId: ChainIdEnum | null
   provider: ProviderEnum | null
   connect: (provider: ProviderEnum) => Promise<void>
   disconnect: () => void
-  sendTx: (tx: TransactionConfig) => Promise<TransactionReceipt>
-  switchNetwork: (network: NetworkEnum) => Promise<boolean>
+  // TODO: sendTx: (tx: TransactionConfig) => Promise<TransactionReceipt>
+  sendTx: (tx: any) => Promise<any>
+  switchNetwork: (chainId: ChainIdEnum) => Promise<boolean>
   toggleWalletModal: () => void
 }
 
@@ -70,7 +69,8 @@ export const WalletProvider = (props: PropsWithChildren) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [provider]);
 
-  const sendTx = useCallback((tx: TransactionConfig) => {
+  const sendTx = useCallback((tx: any) => {
+  // TODO: const sendTx = useCallback((tx: TransactionConfig) => {
     if (!provider) {
       throw new Error('Provider must be defined');
     }
@@ -78,12 +78,12 @@ export const WalletProvider = (props: PropsWithChildren) => {
     return provider.sendTx(tx);
   }, [provider]);
 
-  const switchNetwork = useCallback((network: NetworkEnum) => {
+  const switchNetwork = useCallback((_chainId: ChainIdEnum) => {
     if (!provider) {
       throw new Error('Provider must be defined');
     }
 
-    return provider.switchNetwork(network);
+    return provider.switchNetwork(_chainId);
   }, [provider]);
 
   useEffect(() => {
@@ -125,7 +125,6 @@ export const WalletProvider = (props: PropsWithChildren) => {
         account,
         chainId,
         provider: providerType,
-        network: chainId ? CHAIN_ID_TO_NETWORK[chainId] : null,
         disconnect,
         connect,
         sendTx,
