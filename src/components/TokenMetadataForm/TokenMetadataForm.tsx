@@ -104,7 +104,10 @@ export const TokenMetadataForm = (props: Props) => {
 
     window.addEventListener('beforeunload', setStateToLS);
 
-    return setStateToLS;
+    return () => {
+      setStateToLS();
+      window.removeEventListener('beforeunload', setStateToLS);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BackIcon } from 'components/ui-kit/icons/BackIcon';
 import style from 'components/ui-kit/buttons/BackButton.module.scss';
@@ -6,12 +6,14 @@ import style from 'components/ui-kit/buttons/BackButton.module.scss';
 interface Props {
   onClick?: () => void
   to?: string
+  delta?: number
 }
 
-export const BackButton = (props: Props) => {
+export const BackButton = memo((props: Props) => {
   const {
-    onClick,
     to,
+    delta,
+    onClick,
   } = props;
 
   const navigate = useNavigate();
@@ -21,10 +23,14 @@ export const BackButton = (props: Props) => {
       navigate(`/${to}`);
     }
 
+    if (delta) {
+      navigate(delta);
+    }
+
     if (onClick) {
       onClick();
     }
-  }, [navigate, onClick, to]);
+  }, [navigate, onClick, to, delta]);
 
   return (
     <button
@@ -34,4 +40,4 @@ export const BackButton = (props: Props) => {
       <BackIcon className={style.icon} />
     </button>
   );
-};
+});
