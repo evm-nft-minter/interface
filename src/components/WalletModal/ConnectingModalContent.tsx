@@ -1,6 +1,6 @@
-import { BackButton } from 'components/ui-kit/buttons/BackButton';
 import { Loader } from 'components/ui-kit/Loader/Loader';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
+import { LeftButton } from 'components/WalletModal/LeftButton';
 import style from 'components/WalletModal/ConnectingModalContent.module.scss';
 
 interface Props {
@@ -17,7 +17,7 @@ export const ConnectingModalContent = (props: Props) => {
       {({ ModalHeader, ModalMain }) => (
         <>
           <ModalHeader>
-            <BackButton onClick={onClickBack} />
+            <LeftButton onClick={onClickBack} />
           </ModalHeader>
 
           <ModalMain className={style.main}>

@@ -3,20 +3,6 @@
 $field-height: 80px;
 $field-height-mobil: 60px;
 
-$text-below-height: 20px;
-$text-below-height-mobil: 16px;
-
-$height: $field-height + $text-below-height;
-$height-mobil: $field-height-mobil + $text-below-height-mobil;
-
-.wrapper {
-  min-height: $height;
-
-  @include breakpoint(medium, down) {
-    min-height: $height-mobil;
-  }
-}
-
 .field {
   @include field(
     $min-height: $field-height,

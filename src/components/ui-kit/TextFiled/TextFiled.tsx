@@ -36,10 +36,7 @@ export const TextFiled = <T extends FieldValues>(props: Props<T>) => {
   });
 
   return (
-    <FiledWrapper
-      className={style.wrapper}
-      error={error?.message}
-    >
+    <FiledWrapper error={error?.message}>
       <textarea
         {...field}
         className={cn(style.field, { [style.error]: error })}

@@ -14,6 +14,7 @@ export const WalletButton = memo(() => {
     <button
       className={style.button}
       onClick={toggleWalletModal}
+      type="button"
     >
       {account && <ConnectedWallet />}
       {!account && <ConnectWallet />}

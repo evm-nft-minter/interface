@@ -3,25 +3,19 @@ import cn from 'classnames';
 import style from 'components/ui-kit/FieldWrapper/FieldWrapper.module.scss';
 
 interface Props extends PropsWithChildren {
-  className: string
   error?: string
 }
 
 export const FiledWrapper = (props: Props) => {
-  const {
-    className,
-    error,
-  } = props;
+  const { error } = props;
 
   return (
-    <div className={cn(className, style.wrapper)}>
+    <div className={style.wrapper}>
       {props.children}
 
-      {error && (
-        <p className={cn(style.textBelow, style.error)}>
-          {error}
-        </p>
-      )}
+      <p className={cn(style.textBelow, style.error)}>
+        {error || ''}
+      </p>
     </div>
   );
 };

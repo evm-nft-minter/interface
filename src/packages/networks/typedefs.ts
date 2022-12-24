@@ -1,6 +1,9 @@
 export enum NetworkEnum {
   ETHEREUM = 'ethereum',
   POLYGON = 'polygon',
+  BSC = 'bsc',
+  AVALANCHE = 'avalanche',
+  FANTOM = 'fantom',
 }
 
 export interface Network {

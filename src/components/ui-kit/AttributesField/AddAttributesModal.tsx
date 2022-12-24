@@ -1,10 +1,10 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useLayoutEffect } from 'react';
 import { AttributeFieldGroup } from 'components/ui-kit/AttributesField/AttributeFieldGroup';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Modal } from 'components/ui-kit/Modal/Modal';
-import { useForm } from 'react-hook-form';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import { TokenAttribute, generateAttribute } from 'packages/token';
+import { TokenAttribute } from 'packages/token';
+import { useAttributesFields } from 'components/ui-kit/AttributesField/hooks/useAttributesFields';
 import style from 'components/ui-kit/AttributesField/AddAttributesModal.module.scss';
 
 interface Props {
@@ -13,8 +13,6 @@ interface Props {
   attributes: TokenAttribute[]
   onSave: (attr: TokenAttribute[]) => void
 }
-
-type FieldValues = Record<string, TokenAttribute>;
 
 export const AddAttributesModal = (props: Props) => {
   const {
@@ -26,79 +24,33 @@ export const AddAttributesModal = (props: Props) => {
 
   const {
     control,
-    watch,
-    setValue,
+    fields,
     getValues,
-    register,
-    unregister,
-  } = useForm<FieldValues>();
-
-  const addAttr = useCallback(() => {
-    const newAttr = generateAttribute();
-
-    register(newAttr.id);
-    setValue(newAttr.id, newAttr);
-  }, [register, setValue]);
-
-  const removeAttr = useCallback((id: string) => {
-    unregister(id);
-
-    const _attributes = Object.values(getValues());
-
-    if (_attributes.length === 0) {
-      addAttr();
-    }
-  }, [unregister, getValues, addAttr]);
-
-  const initializeFields = useCallback(() => {
-    if (attributes.length === 0) {
-      addAttr();
-    } else {
-      attributes.forEach((attr) => {
-        register(attr.id);
-        setValue(attr.id, attr);
-      });
-    }
-  }, [attributes, addAttr, register, setValue]);
-
-  const unregisterEmptyFields = useCallback(() => {
-    const _attributes = Object.values(getValues());
-
-    _attributes.forEach((attr) => {
-      if (!(attr.traitType && attr.value)) {
-        unregister(attr.id);
-      }
-    });
-  }, [getValues, unregister]);
-
-  const unregisterAllFields = useCallback(() => {
-    const _attributes = Object.values(getValues());
-
-    _attributes.forEach((attr) => {
-      unregister(attr.id);
-    });
-  }, [getValues, unregister]);
+    append,
+    remove,
+    removeEmpty,
+    initialize,
+    reset,
+  } = useAttributesFields();
 
   const handleSave = useCallback(() => {
-    unregisterEmptyFields();
-    onSave(Object.values(getValues()));
-    unregisterAllFields();
     onClose();
-  }, [getValues, onClose, onSave, unregisterAllFields, unregisterEmptyFields]);
+    removeEmpty();
+    onSave(getValues().attributes);
+    reset();
+  }, [getValues, onClose, onSave, removeEmpty, reset]);
 
   const handleClose = useCallback(() => {
-    unregisterAllFields();
     onClose();
-  }, [onClose, unregisterAllFields]);
+    reset();
+  }, [onClose, reset]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (isOpen) {
-      initializeFields();
+      initialize(attributes);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
-
-  const values = watch();
 
   return (
     <Modal
@@ -119,19 +71,21 @@ export const AddAttributesModal = (props: Props) => {
               </div>
 
               <div className={style.fieldsWrapper}>
-                {Object.entries(values).map(([name, value]) => (
+                {fields.map(({ key, traitType, value }, index) => (
                   <AttributeFieldGroup
-                    key={name}
-                    {...value}
+                    key={key}
+                    traitType={traitType}
+                    value={value}
+                    index={index}
                     control={control}
-                    onRemove={removeAttr}
+                    onRemove={remove}
                   />
                 ))}
               </div>
 
               <Button
                 className={style.addBtn}
-                onClick={addAttr}
+                onClick={append}
                 mode={Button.mode.SECONDARY}
               >
                 Add More

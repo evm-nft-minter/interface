@@ -1,7 +1,7 @@
 import { ProviderEnum } from 'packages/providers';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import { BackButton } from 'components/ui-kit/buttons/BackButton';
+import { LeftButton } from 'components/WalletModal/LeftButton';
 import style from 'components/WalletModal/ErrorModalContent.module.scss';
 
 interface Props {
@@ -28,7 +28,7 @@ export const ErrorModalContent = (props: Props) => {
       {({ ModalHeader, ModalMain }) => (
         <>
           <ModalHeader>
-            <BackButton onClick={onClickBack} />
+            <LeftButton onClick={onClickBack} />
           </ModalHeader>
 
           <ModalMain className={style.main}>
