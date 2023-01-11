@@ -1,40 +1,53 @@
-import { useCallback } from 'react';
-import { Control } from 'react-hook-form';
-import { Field } from 'components/ui-kit/Filed/Filed';
+import { ChangeEvent, useCallback } from 'react';
 import { TokenAttribute } from 'packages/token';
+import { Field } from 'components/ui-kit/Field/Field';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
-import { FieldValues } from 'components/ui-kit/AttributesField/attributesField.typedefs';
 import style from 'components/ui-kit/AttributesField/AttributeFieldGroup.module.scss';
 
 interface Props extends TokenAttribute {
-  control: Control<FieldValues>
-  index: number
-  onRemove: (index: number) => void
+  onRemove: (id: string) => void
+  onChangeAttrType: (id: string, type: string) => void
+  onChangeAttrValue: (id: string, value: string) => void
 }
 
 export const AttributeFieldGroup = (props: Props) => {
   const {
-    control,
-    index,
     onRemove,
+    onChangeAttrType,
+    onChangeAttrValue,
+    id,
+    traitType,
+    value,
   } = props;
 
   const handleRemove = useCallback(() => {
-    onRemove(index);
-  }, [index, onRemove]);
+    onRemove(id);
+  }, [id, onRemove]);
+
+  const handleChangeAttrType = useCallback((
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    onChangeAttrType(id, event.target.value);
+  }, [id, onChangeAttrType]);
+
+  const handleChangeAttrValue = useCallback((
+    event: ChangeEvent<HTMLInputElement>,
+  ) => {
+    onChangeAttrValue(id, event.target.value);
+  }, [id, onChangeAttrValue]);
 
   return (
-    <div className={style.filedGroup}>
+    <div className={style.fieldGroup}>
       <Field
-        name={`attributes.${index}.traitType`}
-        control={control}
+        value={traitType}
         placeholder="Power name"
+        onChange={handleChangeAttrType}
       />
 
       <Field
-        name={`attributes.${index}.value`}
-        control={control}
+        value={value}
         placeholder="Power"
+        onChange={handleChangeAttrValue}
       />
 
       <div className={style.btnWrapper}>

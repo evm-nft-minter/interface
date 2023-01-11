@@ -1,85 +1,43 @@
 import {
-  useState,
   useCallback,
   ChangeEvent,
   MouseEvent,
   DragEvent,
   useMemo,
+  forwardRef,
 } from 'react';
 import cn from 'classnames';
-import {
-  Control,
-  FieldPath,
-  FieldValues,
-  useController,
-} from 'react-hook-form';
-import * as yup from 'yup';
 import { ImageIcon } from 'components/ui-kit/icons/ImageIcon';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
-import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
 import style from 'components/ui-kit/ImageField/ImageField.module.scss';
 
-const schema = yup
-  .mixed()
-  .test((file: File) => file?.type.startsWith('image/'));
-
-interface Props<T extends FieldValues> {
-  name: FieldPath<T>
-  control: Control<T>
+interface Props {
   id?: string
+  value?: File | null
+  error?: any
+  onChange: (value: File | null | undefined) => void
 }
 
-// TODO: move logic to hook
-export const ImageFiled = <T extends FieldValues>(props: Props<T>) => {
+export const ImageField = forwardRef((props: Props, ref: any) => {
   const {
-    name,
-    control,
     id,
+    value,
+    error,
+    onChange,
   } = props;
-
-  const {
-    field: {
-      onChange,
-      value,
-      ref,
-      ...filed
-    },
-    fieldState,
-  } = useController<T>({
-    name,
-    control,
-  });
-
-  const [invalidFileType, setInvalidFileType] = useState<boolean>(false);
 
   const imageUrl = useMemo(() => {
     return value ? URL.createObjectURL(value) : null;
   }, [value]);
 
-  const handelChangeFile = useCallback(async (file: File) => {
-    try {
-      setInvalidFileType(false);
-
-      await schema.validate(file);
-
-      onChange(file);
-    } catch (e) {
-      setInvalidFileType(true);
-    }
+  const handleChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+      onChange(event.target.files && event.target.files[0]);
   }, [onChange]);
-
-  const handleChange = useCallback((
-    event: ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (event.target.files) {
-      handelChangeFile(event.target.files[0]);
-    }
-  }, [handelChangeFile]);
 
   const handleDrop = useCallback((event: DragEvent<any>) => {
     event.preventDefault();
-    handelChangeFile(event.dataTransfer.files[0]);
-  }, [handelChangeFile]);
+    onChange(event.dataTransfer.files[0]);
+  }, [onChange]);
 
   const handleDragOver = useCallback((event: DragEvent<any>) => {
     event.preventDefault();
@@ -90,49 +48,44 @@ export const ImageFiled = <T extends FieldValues>(props: Props<T>) => {
     onChange(null);
   }, [onChange]);
 
-  const error = invalidFileType ? 'Invalid file type' : fieldState.error?.message;
-
   return (
-    <FiledWrapper error={error}>
-      <label
+    <label
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={0}
-        ref={ref}
-        className={cn(style.label, { [style.error]: error || invalidFileType })}
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
+      tabIndex={0}
+      ref={ref}
+      className={cn(style.label, { [style.error]: error })}
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+    >
+      <input
+        className={style.field}
+        onChange={handleChange}
+        value=""
+        type="file"
+        accept="image/*"
+        id={id}
+      />
+
+      <button
+        className={style.removeBtn}
+        onClick={handleRemove}
+        hidden={!imageUrl}
+        type="button"
       >
-        <input
-          {...filed}
-          className={style.filed}
-          onChange={handleChange}
-          value=""
-          type="file"
-          accept="image/*"
-          id={id}
+        <CloseIcon className={style.closeIcon} />
+      </button>
+
+      {imageUrl && (
+        <img
+          className={style.img}
+          src={imageUrl}
+          alt="preview image"
         />
+      )}
 
-        <button
-          className={style.removeBtn}
-          onClick={handleRemove}
-          hidden={!imageUrl}
-          type="button"
-        >
-          <CloseIcon className={style.closeIcon} />
-        </button>
-
-        {imageUrl && (
-          <img
-            className={style.img}
-            src={imageUrl}
-            alt="preview image"
-          />
-        )}
-
-        <div className={cn(style.background, { [style.hidden]: imageUrl })}>
-          <ImageIcon className={style.imgIcon} />
-        </div>
-      </label>
-    </FiledWrapper>
+      <div className={cn(style.background, { [style.hidden]: imageUrl })}>
+        <ImageIcon className={style.imgIcon} />
+      </div>
+    </label>
   );
-};
+});
