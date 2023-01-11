@@ -1,75 +1,53 @@
-import {
-  FieldPath,
-  Control,
-  useController,
-  FieldValues,
-} from 'react-hook-form';
-import { useModal } from 'hooks/useModal';
+import { forwardRef } from 'react';
 import { TokenAttribute } from 'packages/token';
+import { useModal } from 'hooks/useModal';
 import { AddAttributesModal } from 'components/ui-kit/AttributesField/AddAttributesModal';
 import { PlusIcon } from 'components/ui-kit/icons/PlusIcon';
-import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
 import style from 'components/ui-kit/AttributesField/AttributesField.module.scss';
 
-interface Props<T extends FieldValues> {
-  name: FieldPath<T>
-  control: Control<T>
+interface Props {
+  attributes?: TokenAttribute[] | null
+  onChange: (attributes: TokenAttribute[] | undefined | null) => void
 }
 
-export const AttributesField = <T extends FieldValues>(props: Props<T>) => {
+export const AttributesField = forwardRef((props: Props, ref: any) => {
   const {
-    name,
-    control,
+    attributes: _attributes,
+    onChange,
   } = props;
 
-  const {
-    field: {
-      onChange,
-      ...field
-    },
-    fieldState: {
-      error,
-    },
-  } = useController<T>({
-    name,
-    control,
-  });
-
-  const attributes = field.value || [] as TokenAttribute[];
+  const attributes = _attributes || [];
 
   const [isFieldModalOpen, toggleFieldModal] = useModal();
 
   return (
-    <FiledWrapper error={error?.message}>
-      <div className={style.field}>
-        <button
-          className={style.addBtn}
-          type="button"
-          onClick={toggleFieldModal}
-        >
-          <PlusIcon />
-        </button>
+    <div ref={ref} className={style.field}>
+      <button
+        className={style.addBtn}
+        type="button"
+        onClick={toggleFieldModal}
+      >
+        <PlusIcon />
+      </button>
 
-        <AddAttributesModal
-          isOpen={isFieldModalOpen}
-          onClose={toggleFieldModal}
-          attributes={attributes}
-          onSave={onChange}
-        />
+      <AddAttributesModal
+        isOpen={isFieldModalOpen}
+        onClose={toggleFieldModal}
+        attributes={attributes}
+        onSave={onChange}
+      />
 
-        {attributes.map((attr, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={i} className={style.attribute}>
-            <p className={style.name}>
-              {attr.traitType}
-            </p>
+      {attributes.map((attr) => (
+        <div key={attr.id} className={style.attribute}>
+          <p className={style.name}>
+            {attr.traitType}
+          </p>
 
-            <p className={style.value}>
-              {attr.value}
-            </p>
-          </div>
-        ))}
-      </div>
-    </FiledWrapper>
+          <p className={style.value}>
+            {attr.value}
+          </p>
+        </div>
+      ))}
+    </div>
   );
-};
+});

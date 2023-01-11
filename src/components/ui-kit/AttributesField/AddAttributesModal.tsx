@@ -1,10 +1,9 @@
-import { useCallback, useLayoutEffect } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
+import { generateAttribute, TokenAttribute } from 'packages/token';
 import { AttributeFieldGroup } from 'components/ui-kit/AttributesField/AttributeFieldGroup';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Modal } from 'components/ui-kit/Modal/Modal';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import { TokenAttribute } from 'packages/token';
-import { useAttributesFields } from 'components/ui-kit/AttributesField/hooks/useAttributesFields';
 import style from 'components/ui-kit/AttributesField/AddAttributesModal.module.scss';
 
 interface Props {
@@ -18,39 +17,56 @@ export const AddAttributesModal = (props: Props) => {
   const {
     isOpen,
     onClose,
-    attributes,
+    attributes: _attributes,
     onSave,
   } = props;
 
-  const {
-    control,
-    fields,
-    getValues,
-    append,
-    remove,
-    removeEmpty,
-    initialize,
-    reset,
-  } = useAttributesFields();
+  const [attributes, setAttributes] = useState<TokenAttribute[]>([]);
+
+  const addAttr = useCallback(() => {
+    setAttributes((prev) => [...prev, generateAttribute()]);
+  }, []);
+
+  const removeAttr = useCallback((id: string) => {
+    setAttributes((prev) => prev.filter((attr) => attr.id !== id));
+  }, []);
+
+  const changeAttrType = useCallback((id: string, traitType: string) => {
+    setAttributes((prev) => prev.map((attr) => {
+      return attr.id === id ? { ...attr, traitType } : attr;
+    }));
+  }, []);
+
+  const changeAttrValue = useCallback((id: string, value: string) => {
+    setAttributes((prev) => prev.map((attr) => {
+      return attr.id === id ? { ...attr, value } : attr;
+    }));
+  }, []);
 
   const handleSave = useCallback(() => {
     onClose();
-    removeEmpty();
-    onSave(getValues().attributes);
-    reset();
-  }, [getValues, onClose, onSave, removeEmpty, reset]);
+    onSave(attributes.filter((attr) => attr.traitType && attr.value));
+    setAttributes([]);
+  }, [attributes, onClose, onSave]);
 
   const handleClose = useCallback(() => {
     onClose();
-    reset();
-  }, [onClose, reset]);
+    setAttributes([]);
+  }, [onClose]);
 
   useLayoutEffect(() => {
     if (isOpen) {
-      initialize(attributes);
+      setAttributes(_attributes);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
+
+  useLayoutEffect(() => {
+    if (attributes.length === 0) {
+      addAttr();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attributes]);
 
   return (
     <Modal
@@ -71,21 +87,22 @@ export const AddAttributesModal = (props: Props) => {
               </div>
 
               <div className={style.fieldsWrapper}>
-                {fields.map(({ key, traitType, value }, index) => (
+                {attributes.map((attr) => (
                   <AttributeFieldGroup
-                    key={key}
-                    traitType={traitType}
-                    value={value}
-                    index={index}
-                    control={control}
-                    onRemove={remove}
+                    key={attr.id}
+                    id={attr.id}
+                    traitType={attr.traitType}
+                    value={attr.value}
+                    onRemove={removeAttr}
+                    onChangeAttrType={changeAttrType}
+                    onChangeAttrValue={changeAttrValue}
                   />
                 ))}
               </div>
 
               <Button
                 className={style.addBtn}
-                onClick={append}
+                onClick={addAttr}
                 mode={Button.mode.SECONDARY}
               >
                 Add More

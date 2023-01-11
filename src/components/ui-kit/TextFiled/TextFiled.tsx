@@ -1,51 +1,23 @@
+import { forwardRef, TextareaHTMLAttributes } from 'react';
 import cn from 'classnames';
-import {
-  Control,
-  FieldPath,
-  FieldValues,
-  useController,
-} from 'react-hook-form';
-import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
 import style from 'components/ui-kit/TextFiled/TextFiled.module.scss';
 
-interface Props<T extends FieldValues> {
-  name: FieldPath<T>
-  control: Control<T>
-  placeholder?: string
-  disabled?: boolean
-  id?: string
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  error?: any
 }
 
-export const TextFiled = <T extends FieldValues>(props: Props<T>) => {
+export const TextFiled = forwardRef((props: Props, ref: any) => {
   const {
-    name,
-    control,
-    placeholder,
-    disabled,
-    id,
+    error,
+    ...attributes
   } = props;
 
-  const {
-    field,
-    fieldState: {
-      error,
-    },
-  } = useController<T>({
-    name,
-    control,
-  });
-
   return (
-    <FiledWrapper error={error?.message}>
-      <textarea
-        {...field}
-        className={cn(style.field, { [style.error]: error })}
-        value={field.value || ''}
-        disabled={disabled}
-        placeholder={placeholder}
-        id={id}
-        autoComplete="off"
-      />
-    </FiledWrapper>
+    <textarea
+      {...attributes}
+      ref={ref}
+      className={cn(style.field, { [style.error]: error })}
+      autoComplete="off"
+    />
   );
-};
+});

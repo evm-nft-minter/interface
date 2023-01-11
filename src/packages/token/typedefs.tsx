@@ -1,4 +1,5 @@
 export interface TokenAttribute {
+  id: string
   traitType: string
   value: string
 }

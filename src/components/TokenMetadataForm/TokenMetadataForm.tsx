@@ -4,14 +4,10 @@ import {
   useEffect,
   useMemo,
 } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Field } from 'components/ui-kit/Filed/Filed';
-import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
-import { Label } from 'components/ui-kit/Label/Label';
-import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
-import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
+
 import { TokenMetadata } from 'packages/token';
 import {
   setFileToLS,
@@ -19,8 +15,16 @@ import {
   getItemFromLS,
   setItemToLS,
 } from 'packages/localStorage';
-import { Button } from 'components/ui-kit/buttons/Button/Button';
+
 import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
+
+import { Button } from 'components/ui-kit/buttons/Button/Button';
+import { Field } from 'components/ui-kit/Filed/Filed';
+import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
+import { Label } from 'components/ui-kit/Label/Label';
+import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
+import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
+import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
 
 type FieldValues = Nullable<TokenMetadata>;
 
@@ -28,7 +32,11 @@ const schema = yup.object({
   image: yup
     .mixed()
     .nullable()
-    .required('Image is required'),
+    .required('Image is required')
+    .test({
+      message: 'Invalid file type',
+      test: (file: File) => file?.type.startsWith('image/'),
+    }),
   name: yup
     .string()
     .nullable()
@@ -82,11 +90,11 @@ export const TokenMetadataForm = (props: Props) => {
   });
 
   const submit = useCallback((fieldValues: FieldValues) => {
-    const checkImage = (values: FieldValues): values is TokenMetadata => (
+    const checkFields = (values: FieldValues): values is TokenMetadata => (
       Boolean(values.image)
     );
 
-    if (checkImage(fieldValues)) {
+    if (checkFields(fieldValues)) {
       onSubmit(fieldValues);
     }
   }, [onSubmit]);
@@ -116,49 +124,84 @@ export const TokenMetadataForm = (props: Props) => {
       className={style.form}
       onSubmit={handleSubmit(submit)}
     >
-      <Label
-        title="Image of your item"
-        htmlFor="image"
-      >
-        <ImageFiled
-          name="image"
-          control={control}
-          id="image"
-        />
-      </Label>
+      <Controller
+        name="image"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Label
+            title="Image of your item"
+            htmlFor="image"
+          >
+            <FiledWrapper error={fieldState.error?.message}>
+              <ImageFiled
+                id="image"
+                error={fieldState.error}
+                {...field}
+              />
+            </FiledWrapper>
+          </Label>
+        )}
+      />
 
-      <Label
-        title="Name"
-        htmlFor="name"
-        optional
-      >
-        <Field
-          name="name"
-          control={control}
-          id="name"
-          placeholder="Item name"
-        />
-      </Label>
+      <Controller
+        name="name"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Label
+            title="Name"
+            htmlFor="name"
+            optional
+          >
+            <FiledWrapper error={fieldState.error?.message}>
+              <Field
+                id="name"
+                placeholder="Item name"
+                error={fieldState.error}
+                {...field}
+                value={field.value || ''}
+              />
+            </FiledWrapper>
+          </Label>
+        )}
+      />
 
-      <Label
-        title="Description"
-        htmlFor="description"
-        optional
-      >
-        <TextFiled
-          name="description"
-          control={control}
-          id="description"
-          placeholder="Item description"
-        />
-      </Label>
+      <Controller
+        name="description"
+        control={control}
+        render={({ field, fieldState }) => (
+          <Label
+            title="Description"
+            htmlFor="description"
+            optional
+          >
+            <FiledWrapper error={fieldState.error?.message}>
+              <TextFiled
+                id="description"
+                placeholder="Item description"
+                error={fieldState.error}
+                {...field}
+                value={field.value || ''}
+              />
+            </FiledWrapper>
+          </Label>
+        )}
+      />
 
-      <Label title="Item Attributes">
-        <AttributesField
-          name="attributes"
-          control={control}
-        />
-      </Label>
+      <Controller
+        name="attributes"
+        control={control}
+        render={({ field }) => (
+          <Label title="Item Attributes">
+            <FiledWrapper>
+              <AttributesField
+                {...field}
+                attributes={field.value}
+                onChange={field.onChange}
+              />
+            </FiledWrapper>
+          </Label>
+        )}
+      />
 
       <div className={style.buttonPlace}>
         {submitButton || (
