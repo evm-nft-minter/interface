@@ -4,7 +4,7 @@ import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { useWallet } from 'contexts/walletCtx';
 import { getProviderName } from 'packages/providers';
 import { sliceStringFromTo } from 'packages/tools';
-import { CopyButton } from 'components/ui-kit/buttons/CopyButton';
+import { CopyButton } from 'components/ui-kit/buttons/CopyButton/CopyButton';
 import style from 'components/WalletModal/ConnectedModalContent.module.scss';
 
 interface Props {

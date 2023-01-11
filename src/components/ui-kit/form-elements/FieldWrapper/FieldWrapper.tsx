@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import cn from 'classnames';
-import style from 'components/ui-kit/FieldWrapper/FieldWrapper.module.scss';
+import style from 'components/ui-kit/form-elements/FieldWrapper/FieldWrapper.module.scss';
 
 interface Props extends PropsWithChildren {
   error?: string

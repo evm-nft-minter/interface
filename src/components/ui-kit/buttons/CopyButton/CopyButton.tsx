@@ -9,7 +9,7 @@ import {
 import cn from 'classnames';
 import { CopyIcon } from 'components/ui-kit/icons/CopyIcon';
 import { CheckIcon } from 'components/ui-kit/icons/CheckIcon';
-import style from 'components/ui-kit/buttons/CopyButton.module.scss';
+import style from 'components/ui-kit/buttons/CopyButton/CopyButton.module.scss';
 
 interface Props extends PropsWithChildren {
   target: string
