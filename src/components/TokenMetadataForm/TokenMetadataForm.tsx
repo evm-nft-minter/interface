@@ -19,11 +19,11 @@ import {
 import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import { Field } from 'components/ui-kit/Filed/Filed';
-import { TextFiled } from 'components/ui-kit/TextFiled/TextFiled';
+import { Field } from 'components/ui-kit/Field/Field';
+import { TextField } from 'components/ui-kit/TextField/TextField';
 import { Label } from 'components/ui-kit/Label/Label';
-import { ImageFiled } from 'components/ui-kit/ImageField/ImageField';
-import { FiledWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
+import { ImageField } from 'components/ui-kit/ImageField/ImageField';
+import { FieldWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
 import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
 
 type FieldValues = Nullable<TokenMetadata>;
@@ -132,13 +132,13 @@ export const TokenMetadataForm = (props: Props) => {
             title="Image of your item"
             htmlFor="image"
           >
-            <FiledWrapper error={fieldState.error?.message}>
-              <ImageFiled
+            <FieldWrapper error={fieldState.error?.message}>
+              <ImageField
                 id="image"
                 error={fieldState.error}
                 {...field}
               />
-            </FiledWrapper>
+            </FieldWrapper>
           </Label>
         )}
       />
@@ -152,7 +152,7 @@ export const TokenMetadataForm = (props: Props) => {
             htmlFor="name"
             optional
           >
-            <FiledWrapper error={fieldState.error?.message}>
+            <FieldWrapper error={fieldState.error?.message}>
               <Field
                 id="name"
                 placeholder="Item name"
@@ -160,7 +160,7 @@ export const TokenMetadataForm = (props: Props) => {
                 {...field}
                 value={field.value || ''}
               />
-            </FiledWrapper>
+            </FieldWrapper>
           </Label>
         )}
       />
@@ -174,15 +174,15 @@ export const TokenMetadataForm = (props: Props) => {
             htmlFor="description"
             optional
           >
-            <FiledWrapper error={fieldState.error?.message}>
-              <TextFiled
+            <FieldWrapper error={fieldState.error?.message}>
+              <TextField
                 id="description"
                 placeholder="Item description"
                 error={fieldState.error}
                 {...field}
                 value={field.value || ''}
               />
-            </FiledWrapper>
+            </FieldWrapper>
           </Label>
         )}
       />
@@ -192,13 +192,13 @@ export const TokenMetadataForm = (props: Props) => {
         control={control}
         render={({ field }) => (
           <Label title="Item Attributes">
-            <FiledWrapper>
+            <FieldWrapper>
               <AttributesField
                 {...field}
                 attributes={field.value}
                 onChange={field.onChange}
               />
-            </FiledWrapper>
+            </FieldWrapper>
           </Label>
         )}
       />

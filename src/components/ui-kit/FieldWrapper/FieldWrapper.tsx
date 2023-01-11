@@ -7,7 +7,7 @@ interface Props extends PropsWithChildren {
   textBelow?: string
 }
 
-export const FiledWrapper = (props: Props) => {
+export const FieldWrapper = (props: Props) => {
   const {
     error,
     textBelow,

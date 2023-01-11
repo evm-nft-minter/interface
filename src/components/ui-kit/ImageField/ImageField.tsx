@@ -18,7 +18,7 @@ interface Props {
   onChange: (value: File | null | undefined) => void
 }
 
-export const ImageFiled = forwardRef((props: Props, ref: any) => {
+export const ImageField = forwardRef((props: Props, ref: any) => {
   const {
     id,
     value,
@@ -58,7 +58,7 @@ export const ImageFiled = forwardRef((props: Props, ref: any) => {
       onDragOver={handleDragOver}
     >
       <input
-        className={style.filed}
+        className={style.field}
         onChange={handleChange}
         value=""
         type="file"

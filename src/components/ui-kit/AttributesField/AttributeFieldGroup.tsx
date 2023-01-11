@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from 'react';
 import { TokenAttribute } from 'packages/token';
-import { Field } from 'components/ui-kit/Filed/Filed';
+import { Field } from 'components/ui-kit/Field/Field';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
 import style from 'components/ui-kit/AttributesField/AttributeFieldGroup.module.scss';
 
@@ -37,7 +37,7 @@ export const AttributeFieldGroup = (props: Props) => {
   }, [id, onChangeAttrValue]);
 
   return (
-    <div className={style.filedGroup}>
+    <div className={style.fieldGroup}>
       <Field
         value={traitType}
         placeholder="Power name"
