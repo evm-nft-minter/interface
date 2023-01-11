@@ -19,12 +19,12 @@ import {
 import style from 'components/TokenMetadataForm/TokenMetadataForm.module.scss';
 
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import { Field } from 'components/ui-kit/Field/Field';
-import { TextField } from 'components/ui-kit/TextField/TextField';
-import { Label } from 'components/ui-kit/Label/Label';
-import { ImageField } from 'components/ui-kit/ImageField/ImageField';
-import { FieldWrapper } from 'components/ui-kit/FieldWrapper/FieldWrapper';
-import { AttributesField } from 'components/ui-kit/AttributesField/AttributesField';
+import { Field } from 'components/ui-kit/form-elements/Field/Field';
+import { TextField } from 'components/ui-kit/form-elements/TextField/TextField';
+import { Label } from 'components/ui-kit/form-elements/Label/Label';
+import { ImageField } from 'components/ui-kit/form-elements/ImageField/ImageField';
+import { FieldWrapper } from 'components/ui-kit/form-elements/FieldWrapper/FieldWrapper';
+import { AttributesField } from 'components/ui-kit/form-elements/AttributesField/AttributesField';
 
 type FieldValues = Nullable<TokenMetadata>;
 
@@ -59,7 +59,6 @@ interface Props {
   submitButton: ReactNode
 }
 
-// TODO: add hook useTokeMetadataForm
 export const TokenMetadataForm = (props: Props) => {
   const {
     localStorageKey,

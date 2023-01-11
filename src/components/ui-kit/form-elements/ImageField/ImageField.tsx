@@ -9,7 +9,7 @@ import {
 import cn from 'classnames';
 import { ImageIcon } from 'components/ui-kit/icons/ImageIcon';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
-import style from 'components/ui-kit/ImageField/ImageField.module.scss';
+import style from 'components/ui-kit/form-elements/ImageField/ImageField.module.scss';
 
 interface Props {
   id?: string

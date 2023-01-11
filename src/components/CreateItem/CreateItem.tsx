@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { TokenMetadata } from 'packages/token';
 import { WalletButton } from 'components/ui-kit/buttons/WalletButton/WalletButton';
 import { useWallet } from 'contexts/walletCtx';
-import { BackButton } from 'components/ui-kit/buttons/BackButton';
+import { BackButton } from 'components/ui-kit/buttons/BackButton/BackButton';
 import { ROUTES } from 'routes/routes';
 import style from 'components/CreateItem/CreateItem.module.scss';
 

@@ -1,8 +1,8 @@
 import { ChangeEvent, useCallback } from 'react';
 import { TokenAttribute } from 'packages/token';
-import { Field } from 'components/ui-kit/Field/Field';
+import { Field } from 'components/ui-kit/form-elements/Field/Field';
 import { CloseIcon } from 'components/ui-kit/icons/CloseIcon';
-import style from 'components/ui-kit/AttributesField/AttributeFieldGroup.module.scss';
+import style from 'components/ui-kit/form-elements/AttributesField/AttributeFieldGroup.module.scss';
 
 interface Props extends TokenAttribute {
   onRemove: (id: string) => void
