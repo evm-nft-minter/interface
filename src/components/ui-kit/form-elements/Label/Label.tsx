@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import style from 'components/ui-kit/Label/Label.module.scss';
+import style from 'components/ui-kit/form-elements/Label/Label.module.scss';
 
 interface Props extends PropsWithChildren {
   title: string

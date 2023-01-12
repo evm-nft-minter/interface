@@ -1,6 +1,6 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import cn from 'classnames';
-import style from 'components/ui-kit/Field/Field.module.scss';
+import style from 'components/ui-kit/form-elements/Field/Field.module.scss';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   error?: any

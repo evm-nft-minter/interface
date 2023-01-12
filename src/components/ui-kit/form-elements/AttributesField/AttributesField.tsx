@@ -1,9 +1,9 @@
 import { forwardRef } from 'react';
 import { TokenAttribute } from 'packages/token';
 import { useModal } from 'hooks/useModal';
-import { AddAttributesModal } from 'components/ui-kit/AttributesField/AddAttributesModal';
+import { AddAttributesModal } from 'components/ui-kit/form-elements/AttributesField/AddAttributesModal';
 import { PlusIcon } from 'components/ui-kit/icons/PlusIcon';
-import style from 'components/ui-kit/AttributesField/AttributesField.module.scss';
+import style from 'components/ui-kit/form-elements/AttributesField/AttributesField.module.scss';
 
 interface Props {
   attributes?: TokenAttribute[] | null

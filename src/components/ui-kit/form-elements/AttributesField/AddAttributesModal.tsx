@@ -1,10 +1,10 @@
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { generateAttribute, TokenAttribute } from 'packages/token';
-import { AttributeFieldGroup } from 'components/ui-kit/AttributesField/AttributeFieldGroup';
+import { AttributeFieldGroup } from 'components/ui-kit/form-elements/AttributesField/AttributeFieldGroup';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Modal } from 'components/ui-kit/Modal/Modal';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
-import style from 'components/ui-kit/AttributesField/AddAttributesModal.module.scss';
+import style from 'components/ui-kit/form-elements/AttributesField/AddAttributesModal.module.scss';
 
 interface Props {
   isOpen: boolean

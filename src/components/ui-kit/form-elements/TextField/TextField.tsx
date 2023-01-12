@@ -1,6 +1,6 @@
 import { forwardRef, TextareaHTMLAttributes } from 'react';
 import cn from 'classnames';
-import style from 'components/ui-kit/TextField/TextField.module.scss';
+import style from 'components/ui-kit/form-elements/TextField/TextField.module.scss';
 
 interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   error?: any

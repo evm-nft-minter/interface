@@ -1,7 +1,7 @@
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BackIcon } from 'components/ui-kit/icons/BackIcon';
-import style from 'components/ui-kit/buttons/BackButton.module.scss';
+import style from 'components/ui-kit/buttons/BackButton/BackButton.module.scss';
 
 interface Props {
   onClick?: () => void
