@@ -1,11 +1,11 @@
-export enum ProviderEnum {
-  META_MASK = 'metaMask',
-  WALLET_CONNECT = 'walletConnect',
+export enum WalletEnum {
+  META_MASK = 'meta_mask',
+  WALLET_CONNECT = 'wallet_connect',
 }
 
-export enum ProviderEventEnum {
-  ACCOUNT_CHANGED = 'accountChanged',
-  CHAIN_CHANGED = 'chainChanged',
+export enum WalletEventEnum {
+  ACCOUNT_CHANGED = 'account_changed',
+  CHAIN_CHANGED = 'chain_changed',
 }
 
 export enum MetaMaskEventEnum {

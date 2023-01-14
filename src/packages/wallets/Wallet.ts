@@ -1,9 +1,9 @@
 import EventEmitter from 'events';
 import { NETWORKS, ChainIdEnum } from 'packages/networks';
-import { ProviderEventEnum } from 'packages/providers/typedefs';
+import { WalletEventEnum } from 'packages/wallets/typedefs';
 
-export abstract class Provider {
-  protected readonly abstract _provider: any;
+export abstract class Wallet {
+  protected readonly abstract _wallet: any;
 
   protected readonly _eventEmitter: EventEmitter;
 
@@ -75,11 +75,11 @@ export abstract class Provider {
     }
   }
 
-  public on(event: ProviderEventEnum, cb: (payload: any) => void) {
+  public on(event: WalletEventEnum, cb: (payload: any) => void) {
     this._eventEmitter.on(event, cb);
   }
 
-  public removeAllListeners(event: ProviderEventEnum) {
+  public removeAllListeners(event: WalletEventEnum) {
     this._eventEmitter.removeAllListeners(event);
   }
 
@@ -91,7 +91,7 @@ export abstract class Provider {
     return accounts[0].toLowerCase();
   }
 
-  protected _emit(event: ProviderEventEnum, payload: any) {
+  protected _emit(event: WalletEventEnum, payload: any) {
     this._eventEmitter.emit(event, payload);
   }
 }

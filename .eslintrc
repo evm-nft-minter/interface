@@ -105,7 +105,7 @@
       { "blankLine": "always", "prev": "directive", "next": "*" },
       { "blankLine": "always", "prev": "block-like", "next": "*" }
     ],
-    "max-len": ["error", 80, {
+    "max-len": ["error", 90, {
       "ignoreStrings": true,
       "ignoreTemplateLiterals": true,
       "ignoreRegExpLiterals": true,

@@ -1,11 +1,6 @@
 import { useCallback, useState } from 'react';
 
-type LocalStorage<T> = [T, (value: T | ((val: T) => T)) => void];
-
-export const useLocalStorage = <T>(
-  key: string,
-  initial?: T,
-): LocalStorage<T> => {
+export const useLocalStorage = <T>(key: string, initial?: T) => {
   const [stored, setStored] = useState<T>(() => {
     try {
       const item = window.localStorage.getItem(key);
@@ -35,5 +30,5 @@ export const useLocalStorage = <T>(
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return [stored, setValue];
+  return [stored, setValue] as const;
 };

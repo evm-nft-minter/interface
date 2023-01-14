@@ -6,21 +6,25 @@ import {
 } from 'react';
 
 interface Options {
-  initialVisibility?: boolean
+  initialValue?: boolean
   targetElement?: RefObject<any | null>
   localStorageKey?: string
 }
 
-export const useToggleVisibility = (options?: Options) => {
+export const useVisibilityState = (options?: Options) => {
   const {
-    initialVisibility = false,
+    initialValue = false,
     targetElement,
   } = options || {};
 
-  const [isVisible, setIsVisible] = useState(initialVisibility);
+  const [isVisible, setIsVisible] = useState(initialValue);
 
-  const toggleVisibility = useCallback(() => {
-    setIsVisible((prev) => !prev);
+  const show = useCallback(() => {
+    setIsVisible(true);
+  }, []);
+
+  const hidden = useCallback(() => {
+    setIsVisible(false);
   }, []);
 
   useEffect(() => {
@@ -45,5 +49,5 @@ export const useToggleVisibility = (options?: Options) => {
     return () => window.removeEventListener('click', handleClickOutside);
   }, [isVisible, targetElement]);
 
-  return [isVisible, toggleVisibility] as const;
+  return [isVisible, show, hidden] as const;
 };

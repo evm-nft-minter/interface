@@ -1,25 +1,23 @@
 import { Button } from 'components/ui-kit/buttons/Button/Button';
 import { IdentIcon } from 'components/ui-kit/IdentIcon/IdentIcon';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
-import { useWallet } from 'contexts/walletCtx';
-import { getProviderName } from 'packages/providers';
+import { getWalletName, WalletEnum } from 'packages/wallets';
 import { sliceStringFromTo } from 'packages/tools';
 import { CopyButton } from 'components/ui-kit/buttons/CopyButton/CopyButton';
 import style from 'components/WalletModal/ConnectedModalContent.module.scss';
 
 interface Props {
+  account: string
+  wallet: WalletEnum
   onDisconnect: () => void
 }
 
 export const ConnectedModalContent = (props: Props) => {
   const {
+    account,
+    wallet,
     onDisconnect,
   } = props;
-
-  const {
-    account,
-    provider,
-  } = useWallet();
 
   return (
     <ModalContent>
@@ -32,8 +30,8 @@ export const ConnectedModalContent = (props: Props) => {
           <ModalMain className={style.main}>
             <div className={style.borderContainer}>
               <div className={style.row}>
-                <p className={style.provider}>
-                  {`Connected with ${provider && getProviderName(provider)}`}
+                <p className={style.wallet}>
+                  {`Connected with ${getWalletName(wallet)}`}
                 </p>
 
                 <Button
@@ -46,16 +44,16 @@ export const ConnectedModalContent = (props: Props) => {
 
               <div className={style.accountContainer}>
                 <IdentIcon
-                  address={account || ''}
+                  address={account}
                   diameter={16}
                 />
 
                 <p className={style.account}>
-                  {sliceStringFromTo(account || '', 6, -4)}
+                  {sliceStringFromTo(account, 6, -4)}
                 </p>
               </div>
 
-              <CopyButton target={account || ''}>
+              <CopyButton target={account}>
                 Copy Address
               </CopyButton>
             </div>

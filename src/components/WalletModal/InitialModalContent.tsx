@@ -1,19 +1,16 @@
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { ConnectButton } from 'components/WalletModal/ConnectButton';
-import { ProviderEnum } from 'packages/providers';
-import { useHandleConnect } from 'components/WalletModal/hooks/useHandleConnect';
+import { WalletEnum } from 'packages/wallets';
 import style from 'components/WalletModal/InitialModalContent.module.scss';
 
 interface Props {
-  onConnect: (provider: ProviderEnum) => void
+  onConnect: (wallet: WalletEnum) => void
 }
 
 export const InitialModalContent = (props: Props) => {
   const {
     onConnect,
   } = props;
-
-  const handleConnect = useHandleConnect(onConnect);
 
   return (
     <ModalContent>
@@ -25,13 +22,13 @@ export const InitialModalContent = (props: Props) => {
 
           <ModalMain className={style.main}>
             <ConnectButton
-              provider={ProviderEnum.META_MASK}
-              onClick={handleConnect}
+              wallet={WalletEnum.META_MASK}
+              onClick={onConnect}
             />
 
             <ConnectButton
-              provider={ProviderEnum.WALLET_CONNECT}
-              onClick={handleConnect}
+              wallet={WalletEnum.WALLET_CONNECT}
+              onClick={onConnect}
             />
           </ModalMain>
         </>

@@ -8,7 +8,7 @@ import { ROUTES } from 'routes/routes';
 import { CreateIcon } from 'components/ui-kit/icons/CreateIcon';
 import { CollectedIcon } from 'components/ui-kit/icons/CollectedIcon';
 import { CommunityNftIcon } from 'components/ui-kit/icons/CommunityNftIconIcon';
-import { useToggleVisibility } from 'hooks/useToggleVisibility';
+import { useVisibilityState } from 'hooks/useVisibilityState';
 import style from 'components/Header/NavDropdown.module.scss';
 
 const NAV_ITEMS = [{
@@ -32,7 +32,7 @@ export const NavDropdown = () => {
 
   const targetElement = useRef<HTMLDivElement>(null);
 
-  const [isVisible, toggleVisibility] = useToggleVisibility({
+  const [isVisible, show, hidden] = useVisibilityState({
     targetElement,
   });
 
@@ -40,7 +40,7 @@ export const NavDropdown = () => {
     <div ref={targetElement} className={style.dropdown}>
       <button
         className={cn(style.dropdownBtn, { [style.connected]: account })}
-        onClick={toggleVisibility}
+        onClick={show}
       >
         {account ? (
           <IdentIcon
@@ -63,7 +63,7 @@ export const NavDropdown = () => {
                 <NavLink
                   className={style.link}
                   to={to}
-                  onClick={toggleVisibility}
+                  onClick={hidden}
                 >
                   {title}
                   <Icon />

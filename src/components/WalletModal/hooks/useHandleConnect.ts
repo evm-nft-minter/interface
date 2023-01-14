@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { isMobile } from 'react-device-detect';
-import { MetaMask, ProviderEnum } from 'packages/providers';
+import { MetaMask, WalletEnum } from 'packages/wallets';
 
 export const useHandleConnect = (
-  onConnect: (provider: ProviderEnum) => void,
+  onConnect: (wallet: WalletEnum) => void,
 ) => {
   const handleConnectMetamask = useCallback(() => {
     if (MetaMask.isInstalled()) {
-      onConnect(ProviderEnum.META_MASK);
+      onConnect(WalletEnum.META_MASK);
 
       return;
     }
@@ -21,14 +21,14 @@ export const useHandleConnect = (
     }
   }, [onConnect]);
 
-  return useCallback((provider: ProviderEnum) => {
-    switch (provider) {
-      case ProviderEnum.META_MASK:
+  return useCallback((wallet: WalletEnum) => {
+    switch (wallet) {
+      case WalletEnum.META_MASK:
         handleConnectMetamask();
 
         return;
       default:
-        onConnect(provider);
+        onConnect(wallet);
     }
   }, [handleConnectMetamask, onConnect]);
 };

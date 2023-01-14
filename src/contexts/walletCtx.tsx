@@ -7,88 +7,85 @@ import {
 import { makeContext } from 'packages/makeContext';
 import { ChainIdEnum } from 'packages/networks';
 import {
-  ProviderEnum,
-  ProviderEventEnum,
-  Provider,
-  makeProvider,
-} from 'packages/providers';
+  WalletEnum,
+  WalletEventEnum,
+  Wallet,
+  makeWallet,
+} from 'packages/wallets';
 import { useLocalStorage } from 'hooks/useLocalStorage';
-import { WalletModal } from 'components/WalletModal/WalletModal';
-import { useModal } from 'hooks/useModal';
 
 interface WalletCtx {
   account: string | null
   chainId: ChainIdEnum | null
-  provider: ProviderEnum | null
-  connect: (provider: ProviderEnum) => Promise<void>
+  wallet: WalletEnum | null
+  connect: (wallet: WalletEnum) => Promise<void>
   disconnect: () => void
   // TODO: sendTx: (tx: TransactionConfig) => Promise<TransactionReceipt>
   sendTx: (tx: any) => Promise<any>
   switchNetwork: (chainId: ChainIdEnum) => Promise<boolean>
-  toggleWalletModal: () => void
 }
 
 const context = makeContext<WalletCtx>('useWallet');
 
-const [useWallet, CtxProvider] = context;
+const [useWallet, Provider] = context;
 
 export { useWallet };
 
 export const WalletProvider = (props: PropsWithChildren) => {
   const [
-    providerType, setProviderType,
-  ] = useLocalStorage<ProviderEnum | null>('provider', null);
+    walletType, setWalletType,
+  ] = useLocalStorage<WalletEnum | null>('wallet', null);
   const [
     account, setAccount,
   ] = useLocalStorage<string | null>('account', null);
 
-  const [provider, setProvider] = useState<Provider | null>(null);
+  const [wallet, setWallet] = useState<Wallet | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
 
-  const connect = useCallback(async (_providerType: ProviderEnum) => {
-    const _provider = makeProvider(_providerType);
+  const connect = useCallback(async (_walletType: WalletEnum) => {
+    const _wallet = makeWallet(_walletType);
 
-    const [_account, _chainId] = await _provider.connect();
+    const [_account, _chainId] = await _wallet.connect();
 
-    setProviderType(_providerType);
-    setProvider(_provider);
+    setWalletType(_walletType);
+    setWallet(_wallet);
     setChainId(_chainId);
     setAccount(_account);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const disconnect = useCallback(() => {
-    setProviderType(null);
-    setProvider(null);
+    setWalletType(null);
+    setWallet(null);
     setChainId(null);
     setAccount(null);
 
-    provider?.removeAllListeners(ProviderEventEnum.ACCOUNT_CHANGED);
-    provider?.removeAllListeners(ProviderEventEnum.CHAIN_CHANGED);
-    provider?.disconnect();
+    wallet?.removeAllListeners(WalletEventEnum.ACCOUNT_CHANGED);
+    wallet?.removeAllListeners(WalletEventEnum.CHAIN_CHANGED);
+    wallet?.disconnect();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [provider]);
+  }, [wallet]);
 
   const sendTx = useCallback((tx: any) => {
   // TODO: const sendTx = useCallback((tx: TransactionConfig) => {
-    if (!provider) {
-      throw new Error('Provider must be defined');
+    if (!wallet) {
+      throw new Error('Wallet must be defined');
     }
 
-    return provider.sendTx(tx);
-  }, [provider]);
+    return wallet.sendTx(tx);
+  }, [wallet]);
 
   const switchNetwork = useCallback((_chainId: ChainIdEnum) => {
-    if (!provider) {
-      throw new Error('Provider must be defined');
+    if (!wallet) {
+      throw new Error('Wallet must be defined');
     }
 
-    return provider.switchNetwork(_chainId);
-  }, [provider]);
+    return wallet.switchNetwork(_chainId);
+  }, [wallet]);
 
   useEffect(() => {
-    if (account && providerType) {
-      connect(providerType)
+    if (account && walletType) {
+      connect(walletType)
         .catch((e) => {
           // eslint-disable-next-line no-console
           console.error(e);
@@ -99,7 +96,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
   }, []);
 
   useEffect(() => {
-    provider?.on(ProviderEventEnum.ACCOUNT_CHANGED, (
+    wallet?.on(WalletEventEnum.ACCOUNT_CHANGED, (
       _account: string | null,
     ) => {
       if (_account) {
@@ -109,35 +106,27 @@ export const WalletProvider = (props: PropsWithChildren) => {
       }
     });
 
-    provider?.on(ProviderEventEnum.CHAIN_CHANGED, (
+    wallet?.on(WalletEventEnum.CHAIN_CHANGED, (
       _chainId: number,
     ) => {
       setChainId(_chainId);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [provider]);
-
-  const [isWalletModalOpen, toggleWalletModal] = useModal();
+  }, [wallet]);
 
   return (
-    <CtxProvider
+    <Provider
       value={{
         account,
         chainId,
-        provider: providerType,
+        wallet: walletType,
         disconnect,
         connect,
         sendTx,
         switchNetwork,
-        toggleWalletModal,
       }}
     >
       {props.children}
-
-      <WalletModal
-        isOpen={isWalletModalOpen}
-        onClose={toggleWalletModal}
-      />
-    </CtxProvider>
+    </Provider>
   );
 };

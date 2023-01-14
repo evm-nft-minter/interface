@@ -1,26 +1,24 @@
-import { ProviderEnum } from 'packages/providers';
+import { WalletEnum } from 'packages/wallets';
 import { ModalContent } from 'components/ui-kit/ModalContent/ModalContent';
 import { Button } from 'components/ui-kit/buttons/Button/Button';
 import { LeftButton } from 'components/WalletModal/LeftButton';
 import style from 'components/WalletModal/ErrorModalContent.module.scss';
 
 interface Props {
-  provider: ProviderEnum | null
-  onTryAgain: (provider: ProviderEnum) => void
+  wallet: WalletEnum
+  onTryAgain: (wallet: WalletEnum) => void
   onClickBack: () => void
 }
 
 export const ErrorModalContent = (props: Props) => {
   const {
-    provider,
+    wallet,
     onTryAgain,
     onClickBack,
   } = props;
 
   const handleTryAgain = () => {
-    if (provider) {
-      onTryAgain(provider);
-    }
+    onTryAgain(wallet);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { StatusEnum } from 'components/WalletModal/walletModal.typedefs';
 import { useWallet } from 'contexts/walletCtx';
-import { ProviderEnum } from 'packages/providers';
+import { WalletEnum } from 'packages/wallets';
 
 export const useWalletStatus = () => {
   const {
@@ -11,14 +11,14 @@ export const useWalletStatus = () => {
   } = useWallet();
 
   const [status, setStatus] = useState<StatusEnum>(StatusEnum.INITIAL);
-  const [provider, setProvider] = useState<ProviderEnum | null>(null);
+  const [wallet, setWallet] = useState<WalletEnum>(WalletEnum.META_MASK);
 
-  const handleConnect = useCallback(async (_provider: ProviderEnum) => {
-    setProvider(_provider);
+  const handleConnect = useCallback(async (_wallet: WalletEnum) => {
+    setWallet(_wallet);
     setStatus(StatusEnum.CONNECTING);
 
     try {
-      await connect(_provider);
+      await connect(_wallet);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
@@ -41,7 +41,8 @@ export const useWalletStatus = () => {
 
   return {
     status,
-    provider,
+    account,
+    wallet,
     handleConnect,
     handleDisconnect: disconnect,
     updateStatus,

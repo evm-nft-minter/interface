@@ -1,23 +1,23 @@
 import { FC, memo } from 'react';
 import { SvgProps } from 'components/ui-kit/icons/typedefs';
-import { ProviderEnum } from 'packages/providers';
+import { WalletEnum } from 'packages/wallets';
 import { MetaMaskIcon } from 'components/ui-kit/icons/MetaMaskIcon';
 import { WalletConnectIcon } from 'components/ui-kit/icons/WalletConnectIcon';
 
 interface Props extends SvgProps {
-  provider: ProviderEnum | null
+  wallet: WalletEnum | null
 }
 
-export const ProviderIcon: FC<Props> = memo((props) => {
+export const WalletIcon: FC<Props> = memo((props) => {
   const {
-    provider,
+    wallet,
     ...rest
   } = props;
 
-  switch (provider) {
-    case ProviderEnum.META_MASK:
+  switch (wallet) {
+    case WalletEnum.META_MASK:
       return <MetaMaskIcon {...rest} />;
-    case ProviderEnum.WALLET_CONNECT:
+    case WalletEnum.WALLET_CONNECT:
       return <WalletConnectIcon {...rest} />;
   }
 
