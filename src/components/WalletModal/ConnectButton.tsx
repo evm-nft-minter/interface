@@ -1,19 +1,19 @@
-import { ProviderEnum, getProviderName } from 'packages/providers';
-import { ProviderIcon } from 'components/ui-kit/icons/ProviderIcon';
+import { WalletEnum, getWalletName } from 'packages/wallets';
+import { WalletIcon } from 'components/ui-kit/icons/WalletIcon';
 import style from 'components/WalletModal/ConnectButton.module.scss';
 
 interface Props {
-  provider: ProviderEnum
-  onClick: (provider: ProviderEnum) => void
+  wallet: WalletEnum
+  onClick: (wallet: WalletEnum) => void
 }
 
 export const ConnectButton = (props: Props) => {
   const {
-    provider,
+    wallet,
     onClick,
   } = props;
 
-  const handleClick = () => onClick(provider);
+  const handleClick = () => onClick(wallet);
 
   return (
     <button
@@ -21,10 +21,10 @@ export const ConnectButton = (props: Props) => {
       onClick={handleClick}
     >
       <span>
-        {getProviderName(provider)}
+        {getWalletName(wallet)}
       </span>
 
-      <ProviderIcon provider={provider} />
+      <WalletIcon wallet={wallet} />
     </button>
   );
 };

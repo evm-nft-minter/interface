@@ -6,6 +6,7 @@ import { ErrorModalContent } from 'components/WalletModal/ErrorModalContent';
 import { ConnectedModalContent } from 'components/WalletModal/ConnectedModalContent';
 import { StatusEnum } from 'components/WalletModal/walletModal.typedefs';
 import { useWalletStatus } from 'components/WalletModal/hooks/useWalletStatus';
+import { useHandleConnect } from 'components/WalletModal/hooks/useHandleConnect';
 import style from 'components/WalletModal/WalletModal.module.scss';
 
 interface Props {
@@ -21,11 +22,14 @@ export const WalletModal = (props: Props) => {
 
   const {
     status,
-    provider,
+    account,
+    wallet,
     handleConnect,
     handleDisconnect,
     updateStatus,
   } = useWalletStatus();
+
+  const _handleConnect = useHandleConnect(handleConnect);
 
   useEffect(() => {
     updateStatus();
@@ -40,7 +44,7 @@ export const WalletModal = (props: Props) => {
       <div className={style.container}>
         {status === StatusEnum.INITIAL && (
           <InitialModalContent
-            onConnect={handleConnect}
+            onConnect={_handleConnect}
           />
         )}
 
@@ -52,7 +56,7 @@ export const WalletModal = (props: Props) => {
 
         {status === StatusEnum.ERROR && (
           <ErrorModalContent
-            provider={provider}
+            wallet={wallet}
             onTryAgain={handleConnect}
             onClickBack={updateStatus}
           />
@@ -60,6 +64,8 @@ export const WalletModal = (props: Props) => {
 
         {status === StatusEnum.CONNECTED && (
           <ConnectedModalContent
+            account={account || ''}
+            wallet={wallet}
             onDisconnect={handleDisconnect}
           />
         )}
