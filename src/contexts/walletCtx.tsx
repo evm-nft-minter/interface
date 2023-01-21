@@ -5,12 +5,14 @@ import {
   useState,
 } from 'react';
 import { makeContext } from 'packages/makeContext';
-import { ChainIdEnum } from 'packages/networks';
+import { ChainIdEnum, NETWORKS } from 'packages/networks';
 import {
   WalletEnum,
   WalletEventEnum,
   Wallet,
   makeWallet,
+  TransactionRequestInterface,
+  TransactionReceiptInterface,
 } from 'packages/wallets';
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
@@ -20,8 +22,7 @@ interface WalletCtx {
   wallet: WalletEnum | null
   connect: (wallet: WalletEnum) => Promise<void>
   disconnect: () => void
-  // TODO: sendTx: (tx: TransactionConfig) => Promise<TransactionReceipt>
-  sendTx: (tx: any) => Promise<any>
+  sendTx: (tx: TransactionRequestInterface) => Promise<TransactionReceiptInterface>
   switchNetwork: (chainId: ChainIdEnum) => Promise<boolean>
 }
 
@@ -66,8 +67,7 @@ export const WalletProvider = (props: PropsWithChildren) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wallet]);
 
-  const sendTx = useCallback((tx: any) => {
-  // TODO: const sendTx = useCallback((tx: TransactionConfig) => {
+  const sendTx = useCallback((tx: TransactionRequestInterface) => {
     if (!wallet) {
       throw new Error('Wallet must be defined');
     }
@@ -80,7 +80,15 @@ export const WalletProvider = (props: PropsWithChildren) => {
       throw new Error('Wallet must be defined');
     }
 
-    return wallet.switchNetwork(_chainId);
+    const network = NETWORKS[_chainId];
+
+    return wallet.switchNetwork({
+      chainId: _chainId,
+      chainName: network.name,
+      currency: network.currency,
+      rpc: network.rpc,
+      explorer: network.explorer,
+    });
   }, [wallet]);
 
   useEffect(() => {
