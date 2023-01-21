@@ -1,6 +1,10 @@
 import EventEmitter from 'events';
-import { NETWORKS, ChainIdEnum } from 'packages/networks';
-import { WalletEventEnum } from 'packages/wallets/typedefs';
+import {
+  AddEthereumChainInterface,
+  TransactionReceiptInterface,
+  TransactionRequestInterface,
+  WalletEventEnum,
+} from 'packages/wallets/typedefs';
 
 export abstract class Wallet {
   protected readonly abstract _wallet: any;
@@ -28,28 +32,23 @@ export abstract class Wallet {
   }
 
   public async sendTx(
-    transactionConfig: any,
-    // TODO: transactionConfig: TransactionConfig,
-  ): Promise<any> {
-  // TODO: ): Promise<TransactionReceipt> {
-    return this._request('eth_sendTransaction', transactionConfig);
+    transaction: TransactionRequestInterface,
+  ): Promise<TransactionReceiptInterface> {
+    return this._request('eth_sendTransaction', transaction);
   }
 
-  public async addNetwork(chainId: ChainIdEnum): Promise<boolean> {
-    const network = NETWORKS[chainId];
-
+  public async addNetwork(params: AddEthereumChainInterface): Promise<boolean> {
     try {
       await this._request('wallet_addEthereumChain', {
-        chainId: network.chainId,
-        // TODO: chainId: numberToHex(network.chainId),
-        chainName: network.name,
+        chainId: params.chainId,
+        chainName: params.chainName,
         nativeCurrency: {
-          name: network.currency,
-          symbol: network.currency,
-          decimals: 18,
+          name: params.currency,
+          symbol: params.currency,
+          decimals: params.currencyDecimals || 18,
         },
-        rpcUrls: [network.rpc],
-        blockExplorerUrls: [network.explorer],
+        rpcUrls: [params.rpc],
+        blockExplorerUrls: [params.explorer],
       });
 
       return true;
@@ -58,17 +57,16 @@ export abstract class Wallet {
     }
   }
 
-  public async switchNetwork(chainId: ChainIdEnum): Promise<boolean> {
+  public async switchNetwork(params: AddEthereumChainInterface): Promise<boolean> {
     try {
       await this._request('wallet_switchEthereumChain', {
-        chainId,
-        // TODO: chainId: numberToHex(chainId),
+        chainId: params.chainId,
       });
 
       return true;
     } catch (e: any) {
       if (e.code === 4902) {
-        return this.addNetwork(chainId);
+        return this.addNetwork(params);
       }
 
       return false;

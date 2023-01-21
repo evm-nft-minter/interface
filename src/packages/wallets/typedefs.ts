@@ -18,3 +18,44 @@ export enum WalletConnectEventEnum {
   DISCONNECT = 'disconnect',
   CONNECT = 'connect',
 }
+
+export type TransactionRequestInterface = {
+  to?: string
+  from?: string
+  nonce?: string
+  gasLimit?: string
+  gasPrice?: string
+  data?: string
+  value?: string
+  chainId?: number
+  maxPriorityFeePerGas?: string
+  maxFeePerGas?: string
+};
+
+export interface TransactionReceiptInterface {
+  to: string
+  from: string
+  contractAddress: string
+  transactionIndex: number
+  root?: string
+  gasUsed: string
+  logsBloom: string
+  blockHash: string
+  transactionHash: string
+  blockNumber: number
+  confirmations: number
+  cumulativeGasUsed: string
+  effectiveGasPrice: string
+  byzantium: boolean
+  type: number
+  status?: number
+}
+
+export interface AddEthereumChainInterface {
+  chainId: number
+  chainName: string
+  currency: string
+  currencyDecimals?: number
+  rpc: string
+  explorer: string
+}
